@@ -1,0 +1,23 @@
+{
+  "source": "symptom_disease_dataset.csv (Kaggle)",
+  "filter_date": "2025-XX-XX",
+  "diseases": [
+    "Malaria",
+    "Typhoid",
+    "Tuberculosis",
+    "Dengue",
+    "Hepatitis A",
+    "Hepatitis B",
+    "Hepatitis C",
+    "Hepatitis D",
+    "Hepatitis E",
+    "Gastroenteritis",
+    "Pneumonia"
+  ],
+  "rationale": "Diseases with significant burden in Malawi per IDSR bulletins and WHO country data.",
+  "sources": [
+    "Malawi IDSR Weekly Bulletin 2025",
+    "WHO Malawi Country Profile",
+    "MoH Malawi Disease Surveillance Reports"
+  ]
+}

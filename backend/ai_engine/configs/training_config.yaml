@@ -1,0 +1,40 @@
+# Training configuration for AI Disease Prediction Engine
+
+data:
+  raw_path: data/raw/symptom_disease_malawi.csv
+  processed_dir: data/processed
+  test_size: 0.2
+  random_state: 42
+
+training:
+  cv_folds: 5
+  scoring: f1_macro
+  n_jobs: -1
+
+models:
+  svm:
+    enabled: true
+    param_grid:
+      C: [0.1, 1, 10]
+      kernel: ["rbf"]
+      gamma: ["scale", "auto"]
+  random_forest:
+    enabled: true
+    param_grid:
+      n_estimators: [300]
+      max_depth: [null, 20, 40]
+      min_samples_split: [2, 5]
+  xgboost:
+    enabled: true
+    param_grid:
+      n_estimators: [300]
+      max_depth: [4, 6, 8]
+      learning_rate: [0.05, 0.1]
+      subsample: [0.8, 1.0]
+
+output:
+  model_dir: models
+  results_file: models/comparison_results.json
+
+evaluation:
+  top_k: 3
