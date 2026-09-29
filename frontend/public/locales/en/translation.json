@@ -1,0 +1,41 @@
+{
+  "app": {
+    "name": "AI Disease Prediction System",
+    "tagline": "Check your symptoms. Get health guidance."
+  },
+  "nav": {
+    "home": "Home",
+    "predict": "Check Symptoms",
+    "history": "History",
+    "about": "About",
+    "login": "Login",
+    "logout": "Logout"
+  },
+  "home": {
+    "hero_title": "Know your health, early.",
+    "hero_subtitle": "Enter your symptoms and get instant AI-powered guidance — in English or Chichewa.",
+    "cta_start": "Start Symptom Check",
+    "cta_learn": "Learn More"
+  },
+  "symptom": {
+    "title": "What are you feeling?",
+    "subtitle": "Select all symptoms that apply",
+    "select_all": "Select all that apply",
+    "next": "Next",
+    "back": "Back",
+    "submit": "Get Prediction"
+  },
+  "result": {
+    "title": "Possible Condition",
+    "confidence": "Confidence",
+    "alternatives": "Other possibilities",
+    "prevention": "Prevention & Care",
+    "disclaimer": "This is not a medical diagnosis. Consult a healthcare professional.",
+    "new_check": "Start New Check"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "retry": "Try Again"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "app": {
+    "name": "Njira Yowona Matenda ndi AI",
+    "tagline": "Yang'ana zizindikiro. Peza chithandizo."
+  },
+  "nav": {
+    "home": "Kunyumba",
+    "predict": "Yang'ana Zizindikiro",
+    "history": "Mbiri",
+    "about": "Za Ife",
+    "login": "Lowani",
+    "logout": "Tulukani"
+  },
+  "home": {
+    "hero_title": "Dziwani thanzi lanu, msanga.",
+    "hero_subtitle": "Lowetsani zizindikiro zanu ndi kupeza chithandizo cha AI — mu Chingerezi kapena Chichewa.",
+    "cta_start": "Yambani Kuyang'ana",
+    "cta_learn": "Dziwani Zambiri"
+  },
+  "symptom": {
+    "title": "Mukumva bwanji?",
+    "subtitle": "Sankhani zizindikiro zonse zomwe muli nazo",
+    "select_all": "Sankhani zonse zomwe zikugwirizana",
+    "next": "Kutsatira",
+    "back": "Kubwerera",
+    "submit": "Pezani Zotsatira"
+  },
+  "result": {
+    "title": "Matenda Otheka",
+    "confidence": "Kukhulupirika",
+    "alternatives": "Zina zotheka",
+    "prevention": "Kupewa ndi Chisamaliro",
+    "disclaimer": "Uku si kuyeza kwa dokotala. Funsani katswiri wa zaumoyo.",
+    "new_check": "Yambani Kuyang'ana Kwatsopano"
+  },
+  "common": {
+    "loading": "Ikutsegula...",
+    "error": "China chake chalakwika",
+    "retry": "Yesaninso"
+  }
+}
