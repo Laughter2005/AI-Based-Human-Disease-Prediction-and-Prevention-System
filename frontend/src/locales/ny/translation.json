@@ -1,0 +1,131 @@
+{
+  "app": {
+    "name": "Malawi Health AI",
+    "short": "Health AI",
+    "tagline": "Yang'ana zizindikiro. Peza chithandizo. Khalani wathanzi."
+  },
+  "nav": {
+    "home": "Kunyumba",
+    "predict": "Yang'ana Zizindikiro",
+    "about": "Za Ife",
+    "ussd": "Njira ya USSD"
+  },
+  "home": {
+    "hero": {
+      "title": "Dziwani thanzi lanu, msanga.",
+      "subtitle": "Yankhani mafunso ochepa okhudza momwe mukumvera ndi kupeza chithandizo cha AI mwamsanga — mu Chingerezi kapena Chichewa.",
+      "cta_primary": "Yambani Kuyang'ana",
+      "cta_secondary": "Dziwani zambiri",
+      "trust_line": "Kwaulere • Zachinsinsi • Palibe pulogalamu yofunika"
+    },
+    "features": {
+      "title": "Mmene zimagwira ntchito",
+      "ai": {
+        "title": "Kulosera kwa AI",
+        "desc": "Yophunzitsidwa ndi matenda ofala ku Malawi."
+      },
+      "channels": {
+        "title": "Imagwira pa foni iliyonse",
+        "desc": "Gwiritsani ntchito pa smartphone, kapena imbani *XXX# pa foni wamba."
+      },
+      "language": {
+        "title": "Chingerezi ndi Chichewa",
+        "desc": "Pezani mayankho mu chilankhulo chomwe mumamvera bwino."
+      },
+      "privacy": {
+        "title": "Zachinsinsi",
+        "desc": "Zambiri zanu zaumoyo zimatetezedwa ndipo sizigawidwa popanda chilolezo."
+      }
+    },
+    "diseases": {
+      "title": "Imazindikira matenda ofunika ku Malawi",
+      "subtitle": "Malungo • Typhoid • TB • Dengue • Hepatitis • Nimonia • Kutsegula m'mimba"
+    },
+    "ussd_cta": {
+      "title": "Mulibe smartphone? Palibe vuto.",
+      "desc": "Imbani nambala ya USSD pa foni iliyonse kuti mugwiritse ntchito ntchito yomweyi — palibe intaneti yofunika.",
+      "code_label": "Imbani"
+    },
+    "final_cta": {
+      "title": "Muli wokonzeka kuyang'ana zizindikiro?",
+      "desc": "Zimatenga mphindi imodzi yokha.",
+      "button": "Yambani"
+    }
+  },
+  "predict": {
+    "step_label": "Gawo {{current}} pa {{total}}",
+    "step1": {
+      "title": "Mukumva bwanji?",
+      "subtitle": "Sankhani zizindikiro zonse zomwe muli nazo tsopano.",
+      "search": "Sakani zizindikiro..."
+    },
+    "step2": {
+      "title": "Zambiri za inu",
+      "subtitle": "Izi zimathandiza kuti tipeze zotsatira zolondola.",
+      "age": "Zaka (mukhoza kusiya)",
+      "gender": "Mkazi kapena Mwamuna (mukhoza kusiya)",
+      "gender_male": "Mwamuna",
+      "gender_female": "Mkazi",
+      "gender_other": "Sindikufuna kunena",
+      "duration": "Muli ndi zizindikirozi kwa nthawi yayitali bwanji?",
+      "duration_less_1": "Zosakwana tsiku limodzi",
+      "duration_1_3": "Masiku 1-3",
+      "duration_4_7": "Masiku 4-7",
+      "duration_more_1w": "Kupitirira sabata"
+    },
+    "step3": {
+      "title": "Onaninso mayankho anu",
+      "subtitle": "Onetsetsani kuti zonse zili bwino tisanayambe.",
+      "symptoms_selected": "Zizindikiro zosankhidwa",
+      "no_symptoms": "Palibe zizindikiro zosankhidwa."
+    },
+    "buttons": {
+      "back": "Kubwerera",
+      "next": "Kutsatira",
+      "submit": "Pezani Zotsatira",
+      "loading": "Ikufufuza..."
+    }
+  },
+  "result": {
+    "title": "Matenda otheka",
+    "confidence": "Kukhulupirika",
+    "severity_low": "Zosavuta",
+    "severity_moderate": "Zapakatikati",
+    "severity_high": "Zowopsa",
+    "alt_title": "Zina zotheka",
+    "prevention_title": "Kupewa ndi chisamaliro",
+    "disclaimer": "Uku si kuyeza kwa dokotala. Ngati zizindikiro zili zowopsa, funsani chithandizo mwamsanga.",
+    "new_check": "Yambitsani kuyang'ana kwatsopano",
+    "call_helpline": "Imbani foni yothandizira zaumoyo"
+  },
+  "about": {
+    "title": "Za dongosolo ili",
+    "intro": "Malawi Health AI ndi pulojekiti ya maphunziro yomwe imagwiritsa ntchito makina ophunzira kuthandiza kuzindikira matenda kutengera zizindikiro, ndi malangizo a kupewa opangidwira Malawi.",
+    "mission_title": "Cholinga chathu",
+    "mission": "Kupanga chithandizo cha thanzi choyambirira chopezeka kwa Mmalawi aliyense — kaya amagwiritsa ntchito smartphone kapena foni wamba.",
+    "tech_title": "Mmene zimagwira ntchito",
+    "tech_body": "Dongosolo limagwiritsa ntchito mitundu itatu ya makina ophunzira — XGBoost, Random Forest, ndi Support Vector Machine.",
+    "team_title": "Zambiri za pulojekiti",
+    "disclaimer": "Dongosolo ili sililowa m'malo mwa chithandizo cha akatswiri a zaumoyo."
+  },
+  "footer": {
+    "disclaimer": "Si kuyeza kwa dokotala. Nthawi zonse funsani wothandizira wa zaumoyo woyenerera.",
+    "quick_links": "Malumikizidwe",
+    "contact": "Nambala zadzidzidzi",
+    "ministry": "Unduna wa Zaumoyo Malawi",
+    "rights": "Ufulu wonse wasungidwa."
+  },
+  "common": {
+    "loading": "Ikutsegula...",
+    "error": "China chake chalakwika",
+    "retry": "Yesaninso",
+    "back_home": "Bwererani kunyumba",
+    "toggle_theme": "Sinthani maonekedwe",
+    "switch_language": "Sinthani chilankhulo"
+  },
+  "not_found": {
+    "title": "Sitinapeze tsamba",
+    "desc": "Tsamba lomwe mukufuna palibe.",
+    "cta": "Bwererani kunyumba"
+  }
+}

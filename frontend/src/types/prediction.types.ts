@@ -1,38 +1,45 @@
 export interface PredictionRequest {
-  symptoms: string[];       // symptom IDs
-  age?: number;
-  gender?: 'male' | 'female' | 'other';
-  durationDays?: number;
-  language: 'en' | 'ny';
+  symptoms: string[];
+  top_k?: number;
+  language?: 'en' | 'ny';
 }
 
+export interface DiseasePrediction {
+  disease: string;
+  confidence: number;
+}
+
+// Raw shape returned by FastAPI today
+export interface PredictionResponseRaw {
+  model: string;
+  input_symptoms: string[];
+  unknown_symptoms: string[];
+  top_predictions: DiseasePrediction[];
+  language: string;
+}
+
+// Normalized shape used by the frontend (Option B)
 export interface PredictionResult {
-  id: string;
+  model: string;
+  inputSymptoms: string[];
+  unknownSymptoms: string[];
+  language: string;
+
+  // Derived from top_predictions
   predictedDisease: {
-    id: string;
     name: string;
-    nameNy: string;
-    confidence: number;      // 0-1
-    description: string;
+    confidence: number;
     severity: 'low' | 'moderate' | 'high';
   };
-  alternativeDiseases: Array<{
-    id: string;
-    name: string;
-    nameNy: string;
-    confidence: number;
-  }>;
-  prevention: PreventionRecommendation[];
-  recommendation: string;    // seek care / self-manage
-  disclaimer: string;
-  createdAt: string;
+  alternativeDiseases: DiseasePrediction[];
+
+  // Placeholder until backend sends real prevention data
+  prevention: PreventionItem[];
 }
 
-export interface PreventionRecommendation {
+export interface PreventionItem {
   id: string;
   title: string;
-  titleNy: string;
   description: string;
-  descriptionNy: string;
   category: 'hygiene' | 'diet' | 'environment' | 'medical' | 'lifestyle';
 }

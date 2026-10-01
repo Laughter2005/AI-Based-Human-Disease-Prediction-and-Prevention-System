@@ -1,9 +1,9 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL,
+  baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api',
   headers: { 'Content-Type': 'application/json' },
-  timeout: 15000,
+  timeout: 20000,
 });
 
 api.interceptors.request.use((config) => {
@@ -19,7 +19,6 @@ api.interceptors.response.use(
   (error) => {
     if (error.response?.status === 401) {
       localStorage.removeItem('auth_token');
-      // Optionally redirect to login
     }
     return Promise.reject(error);
   }

@@ -1,111 +1,144 @@
-:root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
-
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+    --bg:       250 250 249;   /* stone-50 */
+    --surface:  255 255 255;
+    --text:      15  23  42;   /* slate-900 */
+    --text-muted: 71  85 105;  /* slate-600 */
+    --border:   226 232 240;   /* slate-200 */
   }
 
-  #social .button-icon {
-    filter: invert(1) brightness(2);
+  .dark {
+    --bg:        9  9  11;     /* zinc-950 */
+    --surface:  24 24 27;      /* zinc-900 */
+    --text:    244 244 245;    /* zinc-100 */
+    --text-muted: 161 161 170; /* zinc-400 */
+    --border:   39 39 42;      /* zinc-800 */
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-stone-50 text-slate-900 font-body antialiased;
+    background-color: rgb(var(--bg));
+    color: rgb(var(--text));
+  }
+
+  .dark body {
+    background-color: rgb(var(--bg));
+    color: rgb(var(--text));
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display font-bold tracking-tight;
+  }
+
+  /* Focus ring for accessibility */
+  :focus-visible {
+    @apply outline-none ring-2 ring-primary-500 ring-offset-2 ring-offset-white dark:ring-offset-zinc-950;
   }
 }
 
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-}
+@layer components {
+  /* Primary button — solid warm orange */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded px-5 py-3 text-base font-semibold
+           text-white bg-primary-500 hover:bg-primary-600 active:bg-primary-700
+           shadow-soft hover:shadow-lifted
+           transition-all duration-200 ease-out
+           focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2
+           disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-primary-500;
+  }
 
-body {
-  margin: 0;
-}
+  /* Gradient variant for hero CTAs */
+  .btn-gradient {
+    @apply inline-flex items-center justify-center gap-2 rounded px-6 py-3.5 text-base font-semibold
+           text-white shadow-lifted
+           bg-gradient-to-br from-primary-500 via-primary-600 to-primary-700
+           hover:from-primary-600 hover:via-primary-700 hover:to-primary-800
+           transition-all duration-200 ease-out
+           focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2;
+  }
 
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
-}
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded px-5 py-3 text-base font-semibold
+           bg-white text-slate-700 border border-slate-200
+           hover:bg-slate-50 hover:border-slate-300
+           dark:bg-zinc-900 dark:text-zinc-100 dark:border-zinc-800 dark:hover:bg-zinc-800
+           shadow-soft hover:shadow-lifted
+           transition-all duration-200;
+  }
 
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded px-4 py-2 text-base font-medium
+           text-slate-700 hover:bg-slate-100
+           dark:text-zinc-300 dark:hover:bg-zinc-800
+           transition-colors duration-150;
+  }
+
+  /* Card — small rounded, soft border, soft shadow */
+  .card {
+    @apply rounded bg-white border border-slate-200 shadow-soft
+           dark:bg-zinc-900 dark:border-zinc-800;
+  }
+
+  .card-interactive {
+    @apply card transition-all duration-200 ease-out
+           hover:shadow-lifted hover:-translate-y-0.5 cursor-pointer;
+  }
+
+  /* Input with floating label */
+  .input {
+    @apply block w-full rounded border border-slate-300 bg-white px-4 py-3
+           text-base text-slate-900 placeholder:text-slate-400
+           focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20
+           dark:bg-zinc-900 dark:border-zinc-700 dark:text-zinc-100
+           transition-all duration-150;
+  }
+
+  /* Skeleton shimmer */
+  .skeleton {
+    @apply rounded bg-slate-200 dark:bg-zinc-800;
+    background-image: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.4) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    background-size: 1000px 100%;
+    @apply animate-shimmer;
+  }
+
+  /* Section container */
+  .container-app {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Malawi flag accent bar */
+  .flag-bar {
+    @apply h-1 w-full;
+    background: linear-gradient(90deg,
+      #000000 0% 33.33%,
+      #CE1126 33.33% 66.66%,
+      #339E35 66.66% 100%);
   }
 }
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
   }
-}
-p {
-  margin: 0;
-}
-
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
-}
-
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+  /* Reduced motion respect */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
 }

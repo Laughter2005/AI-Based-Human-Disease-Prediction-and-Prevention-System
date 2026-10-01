@@ -1,18 +1,48 @@
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
-import { SYMPTOMS } from '../utils/constants';
+import { ArrowLeft, ArrowRight, Sparkles } from 'lucide-react';
+import { WizardSteps } from '../components/prediction/WizardSteps';
+import { SymptomGrid } from '../components/prediction/SymptomGrid';
+import { Button } from '../components/ui/Button';
+import { Card } from '../components/ui/Card';
 import { predictionService } from '../services/predictionService';
-import { Button } from '../components/common/Button';
-import type { PredictionResult } from '../types/prediction.types';
+import { usePrediction } from '../hooks/usePrediction';
+import api from '../services/api';
+
+const DURATIONS = ['less_1', '1_3', '4_7', 'more_1w'] as const;
 
 export function Predict() {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
+  const { predict, loading } = usePrediction();
+
+  const [step, setStep] = useState(1);
   const [selected, setSelected] = useState<string[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState<PredictionResult | null>(null);
+  const [age, setAge] = useState('');
+  const [gender, setGender] = useState('');
+  const [duration, setDuration] = useState<string>('');
+  const [allSymptoms, setAllSymptoms] = useState<string[]>([]);
+  const [loadingSymptoms, setLoadingSymptoms] = useState(true);
+
+  // Load symptoms from backend on mount
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const { data } = await api.get('/predictions/symptoms');
+        if (!cancelled) setAllSymptoms(data.symptoms ?? []);
+      } catch {
+        if (!cancelled) toast.error('Could not load symptoms. Is the backend running?');
+      } finally {
+        if (!cancelled) setLoadingSymptoms(false);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const toggle = (id: string) => {
     setSelected((prev) =>
@@ -25,133 +55,221 @@ export function Predict() {
       toast.error('Please select at least one symptom');
       return;
     }
-    setLoading(true);
-    try {
-      const res = await predictionService.predict({
-        symptoms: selected,
-        language: i18n.language === 'ny' ? 'ny' : 'en',
-      });
-      setResult(res);
-    } catch {
-      toast.error(t('common.error'));
-    } finally {
-      setLoading(false);
+    const result = await predict({
+      symptoms: selected,
+      top_k: 5,
+      language: i18n.language === 'ny' ? 'ny' : 'en',
+    });
+    if (result) {
+      navigate('/result', { state: { result } });
     }
   };
 
-  if (result) {
-    return <ResultsView result={result} onReset={() => { setResult(null); setSelected([]); }} />;
-  }
+  const stepLabels = ['Symptoms', 'Details', 'Review'];
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-10">
-      <h1 className="text-2xl font-bold text-gray-900">{t('symptom.title')}</h1>
-      <p className="mt-1 text-gray-600">{t('symptom.subtitle')}</p>
-
-      <div className="mt-6 grid gap-3 sm:grid-cols-2">
-        {SYMPTOMS.map((s) => {
-          const isSelected = selected.includes(s.id);
-          const label = i18n.language === 'ny' ? s.nameNy : s.name;
-          return (
-            <button
-              key={s.id}
-              onClick={() => toggle(s.id)}
-              className={`rounded-lg border p-4 text-left transition-all ${
-                isSelected
-                  ? 'border-primary-500 bg-primary-50 ring-2 ring-primary-500'
-                  : 'border-gray-200 bg-white hover:border-gray-300'
-              }`}
-            >
-              <span className="font-medium text-gray-900">{label}</span>
-            </button>
-          );
-        })}
-      </div>
-
-      <div className="mt-8 flex justify-between">
-        <Button variant="secondary" onClick={() => navigate('/')}>
-          {t('symptom.back')}
-        </Button>
-        <Button onClick={handleSubmit} loading={loading} disabled={selected.length === 0}>
-          {t('symptom.submit')} ({selected.length})
-        </Button>
-      </div>
-    </div>
-  );
-}
-
-function ResultsView({ result, onReset }: { result: PredictionResult; onReset: () => void }) {
-  const { t, i18n } = useTranslation();
-  const lang = i18n.language === 'ny' ? 'Ny' : '';
-  const disease = result.predictedDisease;
-
-  return (
-    <div className="mx-auto max-w-3xl px-4 py-10">
-      <div className="card">
-        <p className="text-sm font-medium text-gray-500">{t('result.title')}</p>
-        <h1 className="mt-1 text-2xl font-bold text-gray-900">
-          {lang === 'Ny' ? disease.nameNy : disease.name}
-        </h1>
-        <div className="mt-2 flex items-center gap-2">
-          <span className="text-sm text-gray-600">{t('result.confidence')}:</span>
-          <span className="font-semibold text-primary-700">
-            {(disease.confidence * 100).toFixed(1)}%
-          </span>
+    <div className="container-app py-10 sm:py-16">
+      <div className="mx-auto max-w-3xl">
+        <div className="mb-8">
+          <p className="text-sm font-medium uppercase tracking-wider text-primary-600 dark:text-primary-400">
+            {t('predict.step_label', { current: step, total: 3 })}
+          </p>
         </div>
-        <span
-          className={`mt-3 inline-block rounded-full px-3 py-1 text-xs font-semibold ${
-            disease.severity === 'high'
-              ? 'bg-red-100 text-red-700'
-              : disease.severity === 'moderate'
-              ? 'bg-amber-100 text-amber-700'
-              : 'bg-green-100 text-green-700'
-          }`}
-        >
-          {disease.severity.toUpperCase()}
-        </span>
-        <p className="mt-4 text-gray-700">{disease.description}</p>
-      </div>
 
-      {result.alternativeDiseases.length > 0 && (
-        <div className="card mt-4">
-          <h2 className="font-semibold text-gray-900">{t('result.alternatives')}</h2>
-          <ul className="mt-3 space-y-2">
-            {result.alternativeDiseases.map((alt) => (
-              <li key={alt.id} className="flex justify-between text-sm">
-                <span className="text-gray-700">
-                  {lang === 'Ny' ? alt.nameNy : alt.name}
-                </span>
-                <span className="text-gray-500">
-                  {(alt.confidence * 100).toFixed(1)}%
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+        <WizardSteps current={step} total={3} labels={stepLabels} />
 
-      <div className="card mt-4">
-        <h2 className="font-semibold text-gray-900">{t('result.prevention')}</h2>
-        <ul className="mt-3 space-y-3">
-          {result.prevention.map((p) => (
-            <li key={p.id}>
-              <p className="font-medium text-gray-900">
-                {lang === 'Ny' ? p.titleNy : p.title}
+        <Card className="animate-fade-in">
+          {/* STEP 1 — Symptoms */}
+          {step === 1 && (
+            <div>
+              <h2 className="font-display text-2xl font-bold text-slate-900 dark:text-zinc-100">
+                {t('predict.step1.title')}
+              </h2>
+              <p className="mt-2 text-slate-600 dark:text-zinc-400">
+                {t('predict.step1.subtitle')}
               </p>
-              <p className="text-sm text-gray-600">
-                {lang === 'Ny' ? p.descriptionNy : p.description}
+
+              <div className="mt-6">
+                <SymptomGrid
+                  symptoms={allSymptoms}
+                  selected={selected}
+                  onToggle={toggle}
+                  loading={loadingSymptoms}
+                />
+              </div>
+
+              <div className="mt-8 flex items-center justify-between">
+                <span className="text-sm text-slate-500 dark:text-zinc-500">
+                  {selected.length} selected
+                </span>
+                <Button
+                  onClick={() => setStep(2)}
+                  disabled={selected.length === 0}
+                  rightIcon={<ArrowRight className="h-4 w-4" />}
+                >
+                  {t('predict.buttons.next')}
+                </Button>
+              </div>
+            </div>
+          )}
+
+          {/* STEP 2 — Details */}
+          {step === 2 && (
+            <div>
+              <h2 className="font-display text-2xl font-bold text-slate-900 dark:text-zinc-100">
+                {t('predict.step2.title')}
+              </h2>
+              <p className="mt-2 text-slate-600 dark:text-zinc-400">
+                {t('predict.step2.subtitle')}
               </p>
-            </li>
-          ))}
-        </ul>
-      </div>
 
-      <div className="mt-6 rounded-lg bg-amber-50 p-4 text-sm text-amber-900 ring-1 ring-amber-200">
-        ⚠️ {t('result.disclaimer')}
-      </div>
+              <div className="mt-6 space-y-5">
+                <div>
+                  <label className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-zinc-300">
+                    {t('predict.step2.age')}
+                  </label>
+                  <input
+                    type="number"
+                    min={0}
+                    max={120}
+                    value={age}
+                    onChange={(e) => setAge(e.target.value)}
+                    className="input"
+                    placeholder="e.g. 25"
+                  />
+                </div>
 
-      <div className="mt-6 flex justify-center">
-        <Button onClick={onReset}>{t('result.new_check')}</Button>
+                <div>
+                  <label className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-zinc-300">
+                    {t('predict.step2.gender')}
+                  </label>
+                  <div className="grid grid-cols-3 gap-2">
+                    {[
+                      { v: 'male', l: t('predict.step2.gender_male') },
+                      { v: 'female', l: t('predict.step2.gender_female') },
+                      { v: 'other', l: t('predict.step2.gender_other') },
+                    ].map(({ v, l }) => (
+                      <button
+                        key={v}
+                        type="button"
+                        onClick={() => setGender(v)}
+                        className={`rounded border px-3 py-2.5 text-sm font-medium transition-colors ${
+                          gender === v
+                            ? 'border-primary-500 bg-primary-50 text-primary-700 dark:bg-primary-900/30 dark:text-primary-300'
+                            : 'border-slate-200 bg-white text-slate-700 hover:bg-slate-50 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800'
+                        }`}
+                      >
+                        {l}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <label className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-zinc-300">
+                    {t('predict.step2.duration')}
+                  </label>
+                  <div className="grid grid-cols-2 gap-2">
+                    {DURATIONS.map((d) => (
+                      <button
+                        key={d}
+                        type="button"
+                        onClick={() => setDuration(d)}
+                        className={`rounded border px-3 py-2.5 text-sm font-medium transition-colors ${
+                          duration === d
+                            ? 'border-primary-500 bg-primary-50 text-primary-700 dark:bg-primary-900/30 dark:text-primary-300'
+                            : 'border-slate-200 bg-white text-slate-700 hover:bg-slate-50 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800'
+                        }`}
+                      >
+                        {t(`predict.step2.duration_${d}`)}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-8 flex items-center justify-between">
+                <Button
+                  variant="secondary"
+                  onClick={() => setStep(1)}
+                  leftIcon={<ArrowLeft className="h-4 w-4" />}
+                >
+                  {t('predict.buttons.back')}
+                </Button>
+                <Button onClick={() => setStep(3)} rightIcon={<ArrowRight className="h-4 w-4" />}>
+                  {t('predict.buttons.next')}
+                </Button>
+              </div>
+            </div>
+          )}
+
+          {/* STEP 3 — Review */}
+          {step === 3 && (
+            <div>
+              <h2 className="font-display text-2xl font-bold text-slate-900 dark:text-zinc-100">
+                {t('predict.step3.title')}
+              </h2>
+              <p className="mt-2 text-slate-600 dark:text-zinc-400">
+                {t('predict.step3.subtitle')}
+              </p>
+
+              <div className="mt-6 space-y-4">
+                <div>
+                  <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-500 dark:text-zinc-500">
+                    {t('predict.step3.symptoms_selected')}
+                  </h3>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {selected.length === 0 ? (
+                      <p className="text-sm text-slate-500 dark:text-zinc-500">
+                        {t('predict.step3.no_symptoms')}
+                      </p>
+                    ) : (
+                      selected.map((s) => (
+                        <span
+                          key={s}
+                          className="inline-flex items-center rounded-full bg-primary-100 px-3 py-1 text-sm font-medium capitalize text-primary-700 dark:bg-primary-900/30 dark:text-primary-300"
+                        >
+                          {s.replace(/_/g, ' ')}
+                        </span>
+                      ))
+                    )}
+                  </div>
+                </div>
+
+                {(age || gender || duration) && (
+                  <div>
+                    <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-500 dark:text-zinc-500">
+                      Details
+                    </h3>
+                    <dl className="mt-3 space-y-1 text-sm text-slate-700 dark:text-zinc-300">
+                      {age && <div><dt className="inline font-medium">Age: </dt><dd className="inline">{age}</dd></div>}
+                      {gender && <div><dt className="inline font-medium">Gender: </dt><dd className="inline capitalize">{gender}</dd></div>}
+                      {duration && <div><dt className="inline font-medium">Duration: </dt><dd className="inline">{t(`predict.step2.duration_${duration}`)}</dd></div>}
+                    </dl>
+                  </div>
+                )}
+              </div>
+
+              <div className="mt-8 flex items-center justify-between">
+                <Button
+                  variant="secondary"
+                  onClick={() => setStep(2)}
+                  leftIcon={<ArrowLeft className="h-4 w-4" />}
+                >
+                  {t('predict.buttons.back')}
+                </Button>
+                <Button
+                  variant="gradient"
+                  onClick={handleSubmit}
+                  loading={loading}
+                  leftIcon={!loading && <Sparkles className="h-4 w-4" />}
+                >
+                  {loading ? t('predict.buttons.loading') : t('predict.buttons.submit')}
+                </Button>
+              </div>
+            </div>
+          )}
+        </Card>
       </div>
     </div>
   );

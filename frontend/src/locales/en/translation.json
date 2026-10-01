@@ -1,0 +1,131 @@
+{
+  "app": {
+    "name": "Malawi Health AI",
+    "short": "Health AI",
+    "tagline": "Check symptoms. Get guidance. Stay healthy."
+  },
+  "nav": {
+    "home": "Home",
+    "predict": "Check Symptoms",
+    "about": "About",
+    "ussd": "USSD Access"
+  },
+  "home": {
+    "hero": {
+      "title": "Know your health, early.",
+      "subtitle": "Answer a few questions about how you feel and get instant AI-powered health guidance — in English or Chichewa.",
+      "cta_primary": "Start Symptom Check",
+      "cta_secondary": "Learn more",
+      "trust_line": "Free • Private • No app needed"
+    },
+    "features": {
+      "title": "How it works",
+      "ai": {
+        "title": "AI-Powered Prediction",
+        "desc": "Trained on disease patterns common in Malawi."
+      },
+      "channels": {
+        "title": "Works on any phone",
+        "desc": "Use the web on your smartphone, or dial *XXX# on any feature phone."
+      },
+      "language": {
+        "title": "English & Chichewa",
+        "desc": "Get answers in the language you're most comfortable with."
+      },
+      "privacy": {
+        "title": "Private & secure",
+        "desc": "Your health data is encrypted and never shared without consent."
+      }
+    },
+    "diseases": {
+      "title": "Detects Malawi priority diseases",
+      "subtitle": "Malaria • Typhoid • TB • Dengue • Hepatitis • Pneumonia • Gastroenteritis"
+    },
+    "ussd_cta": {
+      "title": "No smartphone? No problem.",
+      "desc": "Dial our USSD code on any mobile phone to use the same service — no internet required.",
+      "code_label": "Dial"
+    },
+    "final_cta": {
+      "title": "Ready to check your symptoms?",
+      "desc": "It takes less than a minute.",
+      "button": "Get started"
+    }
+  },
+  "predict": {
+    "step_label": "Step {{current}} of {{total}}",
+    "step1": {
+      "title": "What are you feeling?",
+      "subtitle": "Select all symptoms that apply to you right now.",
+      "search": "Search symptoms..."
+    },
+    "step2": {
+      "title": "A bit more about you",
+      "subtitle": "This helps us give a more accurate prediction.",
+      "age": "Age (optional)",
+      "gender": "Gender (optional)",
+      "gender_male": "Male",
+      "gender_female": "Female",
+      "gender_other": "Prefer not to say",
+      "duration": "How long have you had these symptoms?",
+      "duration_less_1": "Less than a day",
+      "duration_1_3": "1–3 days",
+      "duration_4_7": "4–7 days",
+      "duration_more_1w": "More than a week"
+    },
+    "step3": {
+      "title": "Review your answers",
+      "subtitle": "Check everything looks right before we predict.",
+      "symptoms_selected": "Selected symptoms",
+      "no_symptoms": "No symptoms selected yet."
+    },
+    "buttons": {
+      "back": "Back",
+      "next": "Next",
+      "submit": "Get Prediction",
+      "loading": "Analyzing..."
+    }
+  },
+  "result": {
+    "title": "Possible condition",
+    "confidence": "Confidence",
+    "severity_low": "Low severity",
+    "severity_moderate": "Moderate severity",
+    "severity_high": "High severity",
+    "alt_title": "Other possibilities",
+    "prevention_title": "Prevention & care advice",
+    "disclaimer": "This is not a medical diagnosis. If symptoms are severe or worsening, seek care immediately.",
+    "new_check": "Start a new check",
+    "call_helpline": "Call health helpline"
+  },
+  "about": {
+    "title": "About this system",
+    "intro": "Malawi Health AI is an academic project that uses machine learning to help identify likely diseases based on reported symptoms, with prevention guidance tailored to Malawi.",
+    "mission_title": "Our mission",
+    "mission": "Make early health guidance accessible to every Malawian — whether they use a smartphone or a feature phone.",
+    "tech_title": "How it works",
+    "tech_body": "The system uses three machine learning models — XGBoost, Random Forest, and Support Vector Machine — trained on symptom-disease data filtered to Malawi priority diseases.",
+    "team_title": "Project info",
+    "disclaimer": "This system is not a substitute for professional medical care."
+  },
+  "footer": {
+    "disclaimer": "Not a medical diagnosis. Always consult a qualified health worker for serious symptoms.",
+    "quick_links": "Quick Links",
+    "contact": "Emergency Contacts",
+    "ministry": "Ministry of Health Malawi",
+    "rights": "All rights reserved."
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "retry": "Try again",
+    "back_home": "Back to home",
+    "toggle_theme": "Toggle theme",
+    "switch_language": "Switch language"
+  },
+  "not_found": {
+    "title": "Page not found",
+    "desc": "The page you're looking for doesn't exist.",
+    "cta": "Go home"
+  }
+}
