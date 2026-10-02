@@ -7,49 +7,83 @@
   "nav": {
     "home": "Home",
     "predict": "Check Symptoms",
+    "history": "History",
     "about": "About",
+    "login": "Login",
+    "logout": "Logout",
+    "register": "Register",
+    "dashboard": "Dashboard",
+    "admin": "Admin",
+    "settings": "Settings",
+    "stats": "My statistics",
     "ussd": "USSD Access"
   },
   "home": {
     "hero": {
-      "title": "Know your health, early.",
-      "subtitle": "Answer a few questions about how you feel and get instant AI-powered health guidance — in English or Chichewa.",
-      "cta_primary": "Start Symptom Check",
-      "cta_secondary": "Learn more",
-      "trust_line": "Free • Private • No app needed"
+      "eyebrow": "Ministry of Health · AI-assisted triage",
+      "title_line1": "Fast, accessible",
+      "title_line2": "health guidance",
+      "title_line3": "for every Malawian",
+      "subtitle": "Enter your symptoms and receive AI-powered guidance in seconds. Available in English and Chichewa, on any mobile phone — no app required.",
+      "cta_primary": "Start symptom check",
+      "cta_secondary": "How it works",
+      "trust_free": "Free to use",
+      "trust_no_app": "No app required",
+      "trust_private": "Privacy protected",
+      "image_alt": "Health worker assisting a patient"
     },
-    "features": {
-      "title": "How it works",
-      "ai": {
-        "title": "AI-Powered Prediction",
-        "desc": "Trained on disease patterns common in Malawi."
-      },
-      "channels": {
-        "title": "Works on any phone",
-        "desc": "Use the web on your smartphone, or dial *XXX# on any feature phone."
-      },
-      "language": {
-        "title": "English & Chichewa",
-        "desc": "Get answers in the language you're most comfortable with."
-      },
-      "privacy": {
-        "title": "Private & secure",
-        "desc": "Your health data is encrypted and never shared without consent."
-      }
+    "stats": {
+      "label": "System overview",
+      "users": "Registered users",
+      "predictions": "Health checks completed",
+      "diseases": "Conditions detected",
+      "languages": "Languages supported"
+    },
+    "how": {
+      "label": "How it works",
+      "title": "Three steps to health guidance",
+      "subtitle": "Designed for clarity and speed on any device.",
+      "step1_title": "Describe your symptoms",
+      "step1_desc": "Select from a list of common symptoms in English or Chichewa.",
+      "step2_title": "AI analyzes your input",
+      "step2_desc": "Our model compares your symptoms against patterns of 11 Malawi-priority diseases.",
+      "step3_title": "Receive guidance",
+      "step3_desc": "See likely conditions with confidence scores, plus prevention and care advice.",
+      "cta": "Start your check"
     },
     "diseases": {
-      "title": "Detects Malawi priority diseases",
-      "subtitle": "Malaria • Typhoid • TB • Dengue • Hepatitis • Pneumonia • Gastroenteritis"
+      "label": "Disease coverage",
+      "title": "Trained on Malawi-priority conditions",
+      "subtitle": "Model validated on diseases with the highest burden in the country.",
+      "note": "Predictions are guidance only and do not replace professional medical diagnosis."
     },
-    "ussd_cta": {
+    "ussd": {
+      "label": "Multi-channel access",
       "title": "No smartphone? No problem.",
-      "desc": "Dial our USSD code on any mobile phone to use the same service — no internet required.",
-      "code_label": "Dial"
+      "subtitle": "Dial our USSD shortcode on any mobile phone to access the same service — no internet, no data plan, no app required. The full prediction engine works on feature phones.",
+      "dial_label": "Dial on any phone",
+      "code": "*XXX#",
+      "feature1": "Works on every GSM network",
+      "feature2": "No registration required",
+      "feature3": "Available in English and Chichewa"
+    },
+    "features": {
+      "label": "System capabilities",
+      "title": "Built for the Malawian context",
+      "ai_title": "AI-powered prediction",
+      "ai_desc": "Trained on symptom patterns of Malawi-priority diseases using XGBoost, SVM, and Random Forest.",
+      "channels_title": "Web and USSD access",
+      "channels_desc": "Smartphone users get a rich web interface. Feature phone users dial a shortcode.",
+      "language_title": "Bilingual by design",
+      "language_desc": "Full support for English and Chichewa, with medical terms from published vocabularies.",
+      "security_title": "Privacy and security",
+      "security_desc": "Symptoms are never shared. Optional accounts save history securely under Malawi's Data Protection Act."
     },
     "final_cta": {
       "title": "Ready to check your symptoms?",
-      "desc": "It takes less than a minute.",
-      "button": "Get started"
+      "subtitle": "It takes less than a minute. Free, private, and available in your language.",
+      "cta": "Start symptom check",
+      "cta_ussd": "Dial *XXX#"
     }
   },
   "predict": {
@@ -96,7 +130,11 @@
     "prevention_title": "Prevention & care advice",
     "disclaimer": "This is not a medical diagnosis. If symptoms are severe or worsening, seek care immediately.",
     "new_check": "Start a new check",
-    "call_helpline": "Call health helpline"
+    "call_helpline": "Call health helpline",
+    "signin_nudge_title": "Want to save this result?",
+    "signin_nudge_desc": "Create a free account to keep a history of your health checks and track trends over time.",
+    "signin_nudge_cta": "Create account",
+    "signin_nudge_login": "Sign in"
   },
   "about": {
     "title": "About this system",

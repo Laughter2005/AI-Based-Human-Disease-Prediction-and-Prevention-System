@@ -7,7 +7,7 @@ import type {
   DiseasePrediction,
 } from '../types/prediction.types';
 
-// ---------- Fallback prevention rules (used until backend sends prevention) ----------
+// ---------- Fallback prevention rules ----------
 const FALLBACK_PREVENTION: Record<string, PreventionItem[]> = {
   malaria: [
     { id: 'm1', title: 'Sleep under a mosquito net', description: 'Use an insecticide-treated net every night, especially during rainy season.', category: 'environment' },
@@ -72,7 +72,6 @@ const GENERIC_PREVENTION: PreventionItem[] = [
   { id: 'gen3', title: 'Monitor your symptoms', description: 'If symptoms worsen, seek care immediately.', category: 'medical' },
 ];
 
-// ---------- Severity derivation (fallback until backend sends severity) ----------
 function deriveSeverity(confidence: number): 'low' | 'moderate' | 'high' {
   if (confidence >= 0.75) return 'high';
   if (confidence >= 0.45) return 'moderate';
@@ -84,7 +83,6 @@ function getPrevention(diseaseName: string): PreventionItem[] {
   return FALLBACK_PREVENTION[key] ?? GENERIC_PREVENTION;
 }
 
-// ---------- Normalize raw → frontend ----------
 function normalize(raw: PredictionResponseRaw): PredictionResult {
   const [top, ...rest] = raw.top_predictions;
   const topDisease = top?.disease ?? 'Unknown';
@@ -105,7 +103,18 @@ function normalize(raw: PredictionResponseRaw): PredictionResult {
   };
 }
 
-// ---------- Public API ----------
+// ---------- History types ----------
+export interface HistoryItem {
+  id: number;
+  top_disease: string;
+  top_confidence: number;
+  model_name: string;
+  language: string;
+  symptoms: string[];
+  unknown_symptoms: string[];
+  created_at: string;
+}
+
 export const predictionService = {
   async predict(payload: PredictionRequest): Promise<PredictionResult> {
     const { data } = await api.post<PredictionResponseRaw>('/predictions', {
@@ -114,5 +123,12 @@ export const predictionService = {
       language: payload.language ?? 'en',
     });
     return normalize(data);
+  },
+
+  async history(limit = 50): Promise<HistoryItem[]> {
+    const { data } = await api.get<HistoryItem[]>('/predictions/history', {
+      params: { limit },
+    });
+    return data;
   },
 };

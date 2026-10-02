@@ -31,7 +31,7 @@ class Settings(BaseSettings):
     cors_origins: str = "http://localhost:5173,http://localhost:3000"
 
     # Database (used later)
-    database_url: str = "postgresql://postgres:postgres@localhost:5432/disease_db"
+    database_url: str = "postgresql+psycopg://USER:PASSWORD@localhost:5432/DB_NAME"
 
     # Redis (used later)
     redis_url: str = "redis://localhost:6379/0"

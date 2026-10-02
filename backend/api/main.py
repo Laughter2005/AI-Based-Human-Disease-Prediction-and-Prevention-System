@@ -7,8 +7,10 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from config import get_settings
+from db.base import Base
+from db.session import engine
 from dependencies import get_predictor
-from routes import health, prediction
+from routes import admin, auth, health, prediction, stats
 
 
 settings = get_settings()
@@ -16,12 +18,16 @@ settings = get_settings()
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """Warm up the model at startup so the first request isn't slow."""
     print("Loading ML predictor...")
     predictor = get_predictor()
     print(f"  Model: {predictor.model_name}")
     print(f"  Known symptoms: {len(predictor.known_symptoms)}")
     print(f"  Known diseases: {len(predictor.known_diseases)}")
+
+    print("Creating database tables...")
+    Base.metadata.create_all(bind=engine)
+    print("  Database ready.")
+
     yield
     print("Shutting down.")
 
@@ -43,9 +49,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Register routes under /api
 app.include_router(health.router, prefix=settings.api_prefix)
 app.include_router(prediction.router, prefix=settings.api_prefix)
+app.include_router(auth.router, prefix=settings.api_prefix)
+app.include_router(admin.router, prefix=settings.api_prefix)
+app.include_router(stats.router, prefix=settings.api_prefix)
 
 
 @app.get("/")

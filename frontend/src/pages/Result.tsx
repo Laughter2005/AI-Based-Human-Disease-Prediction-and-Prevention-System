@@ -1,20 +1,22 @@
 import { useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { AlertTriangle, ArrowLeft, RefreshCw, ShieldCheck, Stethoscope } from 'lucide-react';
+import { AlertTriangle, ArrowLeft, RefreshCw, ShieldCheck, Stethoscope, UserPlus } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { Card } from '../components/ui/Card';
 import { ResultCard } from '../components/prediction/ResultCard';
 import { Badge } from '../components/ui/Badge';
+import { useAuthStore } from '../store/authStore';
 import type { PredictionResult } from '../types/prediction.types';
 
 export function Result() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
+  const { user } = useAuthStore();
+
   const result = (location.state as { result?: PredictionResult } | null)?.result;
 
-  // If someone lands here directly without a result, send them to predict
   useEffect(() => {
     if (!result) {
       navigate('/predict', { replace: true });
@@ -114,6 +116,39 @@ export function Result() {
             {t('result.disclaimer')}
           </p>
         </div>
+
+        {/* Anonymous user nudge — only shown when not logged in */}
+        {!user && (
+          <Card className="border-primary-200 bg-primary-50 dark:border-primary-500/30 dark:bg-primary-500/10 animate-fade-in">
+            <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex items-start gap-3">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded bg-primary-500 text-white">
+                  <UserPlus className="h-5 w-5" />
+                </div>
+                <div>
+                  <p className="font-semibold text-primary-900 dark:text-primary-200">
+                    Want to save this result?
+                  </p>
+                  <p className="mt-0.5 text-sm text-primary-800 dark:text-primary-300">
+                    Create a free account to keep a history of your health checks and track trends over time.
+                  </p>
+                </div>
+              </div>
+              <div className="flex shrink-0 gap-2">
+                <Link to="/register">
+                  <Button variant="gradient" size="sm">
+                    Create account
+                  </Button>
+                </Link>
+                <Link to="/login">
+                  <Button variant="secondary" size="sm">
+                    Sign in
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </Card>
+        )}
 
         {/* Actions */}
         <div className="flex flex-wrap justify-center gap-3 pt-4">

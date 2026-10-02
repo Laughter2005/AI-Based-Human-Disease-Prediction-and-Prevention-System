@@ -62,11 +62,13 @@ export default {
         base: ['17px', { lineHeight: '1.6' }],   // larger for accessibility
       },
       borderRadius: {
-        sm: '6px',
-        DEFAULT: '8px',       // "small rounded"
-        md: '10px',
-        lg: '14px',
-        xl: '20px',
+        none: '0',
+        sm: '2px',
+        DEFAULT: '3px',       // "small rounded"
+        md: '4px',
+        lg: '6px',
+        xl: '8px',
+       '2xl': '10px',
       },
       boxShadow: {
         soft: '0 1px 3px rgba(0,0,0,0.05), 0 4px 12px rgba(0,0,0,0.04)',
@@ -92,6 +94,7 @@ export default {
         pulseSoft: {
           '0%, 100%': { opacity: '1' },
           '50%':      { opacity: '0.6' },
+          'pulse-soft': 'pulseSoft 2.5s ease-in-out infinite',
         },
         shimmer: {
           '0%':   { backgroundPosition: '-1000px 0' },

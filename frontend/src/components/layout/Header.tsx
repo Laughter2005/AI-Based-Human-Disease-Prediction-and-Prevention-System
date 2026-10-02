@@ -1,14 +1,18 @@
 import { Link, NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Activity, Menu, X } from 'lucide-react';
+import { Activity, Menu, X, LogIn } from 'lucide-react';
 import { useState } from 'react';
 import { cn } from '../../utils/cn';
 import { ThemeToggle } from '../ui/ThemeToggle';
 import { LanguageSwitcher } from '../ui/LanguageSwitcher';
+import { UserMenu } from '../ui/UserMenu';
+import { useAuthStore } from '../../store/authStore';
 
 export function Header() {
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
+  const { token, user } = useAuthStore();
+  const isAuthed = !!token && !!user;
 
   const linkClass = ({ isActive }: { isActive: boolean }) =>
     cn(
@@ -40,7 +44,7 @@ export function Header() {
           <div className="flex h-9 w-9 items-center justify-center rounded bg-primary-500 text-white">
             <Activity className="h-5 w-5" />
           </div>
-          <span className="font-display text-lg font-bold tracking-tight text-slate-900 dark:text-zinc-100">
+          <span className="hidden font-display text-lg font-bold tracking-tight text-slate-900 sm:inline dark:text-zinc-100">
             {t('app.name')}
           </span>
         </Link>
@@ -52,6 +56,17 @@ export function Header() {
             <LanguageSwitcher />
           </div>
           <ThemeToggle />
+          {isAuthed ? (
+            <UserMenu />
+          ) : (
+            <Link
+              to="/login"
+              className="hidden items-center gap-1.5 rounded bg-primary-500 px-3 py-2 text-sm font-semibold text-white hover:bg-primary-600 sm:inline-flex"
+            >
+              <LogIn className="h-4 w-4" />
+              {t('nav.login')}
+            </Link>
+          )}
           <button
             onClick={() => setOpen((o) => !o)}
             className="inline-flex h-10 w-10 items-center justify-center rounded border border-slate-200 bg-white text-slate-600 md:hidden dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300"
@@ -68,6 +83,16 @@ export function Header() {
             {navLinks}
             <div className="mt-2 flex items-center gap-2 border-t border-slate-200 pt-3 dark:border-zinc-800">
               <LanguageSwitcher />
+              {!isAuthed && (
+                <Link
+                  to="/login"
+                  onClick={() => setOpen(false)}
+                  className="ml-auto inline-flex items-center gap-1.5 rounded bg-primary-500 px-3 py-2 text-sm font-semibold text-white"
+                >
+                  <LogIn className="h-4 w-4" />
+                  {t('nav.login')}
+                </Link>
+              )}
             </div>
           </div>
         </div>

@@ -7,49 +7,83 @@
   "nav": {
     "home": "Kunyumba",
     "predict": "Yang'ana Zizindikiro",
+    "history": "Mbiri",
     "about": "Za Ife",
+    "login": "Lowani",
+    "logout": "Tulukani",
+    "register": "Lembetsani",
+    "dashboard": "Dashboard",
+    "admin": "Woyang'anira",
+    "settings": "Zokonda",
+    "stats": "Ziwerengero zanga",
     "ussd": "Njira ya USSD"
   },
   "home": {
     "hero": {
-      "title": "Dziwani thanzi lanu, msanga.",
-      "subtitle": "Yankhani mafunso ochepa okhudza momwe mukumvera ndi kupeza chithandizo cha AI mwamsanga — mu Chingerezi kapena Chichewa.",
-      "cta_primary": "Yambani Kuyang'ana",
-      "cta_secondary": "Dziwani zambiri",
-      "trust_line": "Kwaulere • Zachinsinsi • Palibe pulogalamu yofunika"
+      "eyebrow": "Unduna wa Zaumoyo · Chithandizo cha AI",
+      "title_line1": "Chithandizo cha thanzi",
+      "title_line2": "chofikira",
+      "title_line3": "kwa Mmalawi aliyense",
+      "subtitle": "Lowetsani zizindikiro zanu ndi kupeza chithandizo cha AI mwamsanga. Mu Chingerezi kapena Chichewa, pa foni iliyonse — palibe pulogalamu yofunika.",
+      "cta_primary": "Yambani kuyang'ana",
+      "cta_secondary": "Mmene zimagwira",
+      "trust_free": "Kwaulere",
+      "trust_no_app": "Palibe pulogalamu",
+      "trust_private": "Zachinsinsi zotetezedwa",
+      "image_alt": "Wothandizira wa zaumoyo akuthandiza wodwala"
     },
-    "features": {
-      "title": "Mmene zimagwira ntchito",
-      "ai": {
-        "title": "Kulosera kwa AI",
-        "desc": "Yophunzitsidwa ndi matenda ofala ku Malawi."
-      },
-      "channels": {
-        "title": "Imagwira pa foni iliyonse",
-        "desc": "Gwiritsani ntchito pa smartphone, kapena imbani *XXX# pa foni wamba."
-      },
-      "language": {
-        "title": "Chingerezi ndi Chichewa",
-        "desc": "Pezani mayankho mu chilankhulo chomwe mumamvera bwino."
-      },
-      "privacy": {
-        "title": "Zachinsinsi",
-        "desc": "Zambiri zanu zaumoyo zimatetezedwa ndipo sizigawidwa popanda chilolezo."
-      }
+    "stats": {
+      "label": "Chiwerengero cha dongosolo",
+      "users": "Ogwiritsa olembetsa",
+      "predictions": "Kuyang'ana komaliza",
+      "diseases": "Matenda ozindikira",
+      "languages": "Zinenero zothandizidwa"
+    },
+    "how": {
+      "label": "Mmene zimagwira",
+      "title": "Masitepe atatu a chithandizo",
+      "subtitle": "Zopangidwira kumveka bwino ndi mwachangu pa chipangizo chilichonse.",
+      "step1_title": "Fotokozani zizindikiro zanu",
+      "step1_desc": "Sankhani m'ndandanda wa zizindikiro zodziwika bwino mu Chingerezi kapena Chichewa.",
+      "step2_title": "AI imafufuza",
+      "step2_desc": "Modeli yathu imayerekeza zizindikiro zanu ndi mitundu ya matenda 11 ofunika kwambiri ku Malawi.",
+      "step3_title": "Landirani chithandizo",
+      "step3_desc": "Onani matenda otheka ndi kukhulupirika kwake, pamodzi ndi malangizo a kupewa ndi chisamaliro.",
+      "cta": "Yambani kuyang'ana kwanu"
     },
     "diseases": {
-      "title": "Imazindikira matenda ofunika ku Malawi",
-      "subtitle": "Malungo • Typhoid • TB • Dengue • Hepatitis • Nimonia • Kutsegula m'mimba"
+      "label": "Kufikira kwa matenda",
+      "title": "Yophunzitsidwa pa matenda ofunika ku Malawi",
+      "subtitle": "Modeli yotsimikizika pa matenda omwe ali ndi vuto lalikulu m'dziko.",
+      "note": "Zotsatira ndi chitsogozo chabe ndipo sizilowa m'malo mwa kuyeza kwa dokotala."
     },
-    "ussd_cta": {
+    "ussd": {
+      "label": "Njira zambiri",
       "title": "Mulibe smartphone? Palibe vuto.",
-      "desc": "Imbani nambala ya USSD pa foni iliyonse kuti mugwiritse ntchito ntchito yomweyi — palibe intaneti yofunika.",
-      "code_label": "Imbani"
+      "subtitle": "Imbani nambala ya USSD pa foni iliyonse kuti mugwiritse ntchito ntchito yomweyi — palibe intaneti, palibe data, palibe pulogalamu.",
+      "dial_label": "Imbani pa foni iliyonse",
+      "code": "*XXX#",
+      "feature1": "Imagwira pa netiweki iliyonse ya GSM",
+      "feature2": "Palibe kulembetsa kofunika",
+      "feature3": "Ikupezeka mu Chingerezi ndi Chichewa"
+    },
+    "features": {
+      "label": "Zomwe dongosolo limatha",
+      "title": "Zopangidwira Malawi",
+      "ai_title": "Kulosera kwa AI",
+      "ai_desc": "Yophunzitsidwa pa zizindikiro za matenda ofunika ku Malawi pogwiritsa ntchito XGBoost, SVM, ndi Random Forest.",
+      "channels_title": "Web ndi USSD",
+      "channels_desc": "Ogwiritsa smartphone amapeza mawonekedwe a web. Ogwiritsa foni wamba amaimba nambala.",
+      "language_title": "Zinenero ziwiri",
+      "language_desc": "Kuthandizira kwathunthu Chingerezi ndi Chichewa, ndi mawu a zachipatala kuchokera m'mabuku.",
+      "security_title": "Chinsinsi ndi chitetezo",
+      "security_desc": "Zizindikiro sizigawidwa. Maakaunti osasankha amasunga mbiri motetezeka pansi pa lamulo la Data Protection Act."
     },
     "final_cta": {
       "title": "Muli wokonzeka kuyang'ana zizindikiro?",
-      "desc": "Zimatenga mphindi imodzi yokha.",
-      "button": "Yambani"
+      "subtitle": "Zimatenga mphindi imodzi yokha. Kwaulere, kwachinsinsi, mu chilankhulo chanu.",
+      "cta": "Yambani kuyang'ana",
+      "cta_ussd": "Imbani *XXX#"
     }
   },
   "predict": {
@@ -96,7 +130,11 @@
     "prevention_title": "Kupewa ndi chisamaliro",
     "disclaimer": "Uku si kuyeza kwa dokotala. Ngati zizindikiro zili zowopsa, funsani chithandizo mwamsanga.",
     "new_check": "Yambitsani kuyang'ana kwatsopano",
-    "call_helpline": "Imbani foni yothandizira zaumoyo"
+    "call_helpline": "Imbani foni yothandizira zaumoyo",
+    "signin_nudge_title": "Mukufuna kusunga zotsatira izi?",
+    "signin_nudge_desc": "Pangani akaunti yaulere kuti musunge mbiri ya kuyang'ana kwanu ndi kuyang'anira mmene zikuyendera.",
+    "signin_nudge_cta": "Pangani akaunti",
+    "signin_nudge_login": "Lowani"
   },
   "about": {
     "title": "Za dongosolo ili",
