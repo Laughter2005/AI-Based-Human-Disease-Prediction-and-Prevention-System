@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 import {
   Calendar,
   Download,
@@ -8,10 +9,10 @@ import {
   Users as UsersIcon,
   Activity,
 } from 'lucide-react';
-import { Card } from '../ui/Card';
 import { Button } from '../ui/Button';
 import { TextInput } from '../ui/TextInput';
 import { statsService, type DateRangeReport } from '../../services/statsService';
+import { cn } from '../../utils/cn';
 
 function isoDaysAgo(n: number): string {
   const d = new Date();
@@ -20,6 +21,7 @@ function isoDaysAgo(n: number): string {
 }
 
 export function ReportsTab() {
+  const { t } = useTranslation();
   const [startDate, setStartDate] = useState(isoDaysAgo(30));
   const [endDate, setEndDate] = useState(isoDaysAgo(0));
   const [report, setReport] = useState<DateRangeReport | null>(null);
@@ -42,9 +44,9 @@ export function ReportsTab() {
     setExporting('predictions');
     try {
       await statsService.downloadPredictionsCsv(startDate, endDate);
-      toast.success('Predictions CSV downloaded');
+      toast.success(t('admin.reports.export_success_predictions'));
     } catch {
-      toast.error('Export failed');
+      toast.error(t('admin.reports.export_failed'));
     } finally {
       setExporting(null);
     }
@@ -54,207 +56,253 @@ export function ReportsTab() {
     setExporting('users');
     try {
       await statsService.downloadUsersCsv();
-      toast.success('Users CSV downloaded');
+      toast.success(t('admin.reports.export_success_users'));
     } catch {
-      toast.error('Export failed');
+      toast.error(t('admin.reports.export_failed'));
     } finally {
       setExporting(null);
     }
   }
 
   const maxDaily = report ? Math.max(1, ...report.daily_breakdown.map((d) => d.count)) : 1;
+  const maxDisease = report ? Math.max(1, ...report.top_diseases.map((d) => d.count)) : 1;
 
   return (
     <div className="space-y-6">
       {/* Date range controls */}
-      <Card>
-        <div className="flex items-center gap-3">
-          <Calendar className="h-5 w-5 text-primary-600 dark:text-primary-400" />
-          <h2 className="font-display text-lg font-bold text-slate-900 dark:text-zinc-100">
-            Report period
+      <section className="border border-slate-200 bg-white shadow-sm dark:border-zinc-800 dark:bg-zinc-950">
+        <div className="border-b border-slate-200 p-6 dark:border-zinc-800 sm:p-8">
+          <div className="flex items-center gap-2">
+            <Calendar className="h-5 w-5 text-primary-600 dark:text-primary-400" />
+            <p className="text-xs font-bold uppercase tracking-wider text-primary-600 dark:text-primary-400">
+              {t('admin.reports.label')}
+            </p>
+          </div>
+          <h2 className="mt-2 font-display text-xl font-bold text-slate-900 dark:text-zinc-100">
+            {t('admin.reports.date_range_title')}
           </h2>
         </div>
 
-        <div className="mt-5 grid gap-4 sm:grid-cols-3 sm:items-end">
-          <TextInput
-            label="Start date"
-            type="date"
-            value={startDate}
-            onChange={(e) => setStartDate(e.target.value)}
-          />
-          <TextInput
-            label="End date"
-            type="date"
-            value={endDate}
-            onChange={(e) => setEndDate(e.target.value)}
-          />
-          <Button
-            variant="gradient"
-            onClick={runReport}
-            loading={loading}
-            className="w-full sm:w-auto"
-          >
-            Generate report
-          </Button>
-        </div>
+        <div className="p-6 sm:p-8">
+          <div className="grid gap-4 sm:grid-cols-3 sm:items-end">
+            <TextInput
+              label={t('admin.reports.start_date')}
+              type="date"
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
+            />
+            <TextInput
+              label={t('admin.reports.end_date')}
+              type="date"
+              value={endDate}
+              onChange={(e) => setEndDate(e.target.value)}
+            />
+            <Button
+              onClick={runReport}
+              loading={loading}
+              className="w-full bg-primary-600 hover:bg-primary-700 sm:w-auto"
+            >
+              {loading ? t('admin.reports.generating') : t('admin.reports.generate')}
+            </Button>
+          </div>
 
-        <div className="mt-4 flex flex-wrap gap-2">
-          <Button
-            variant="secondary"
-            size="sm"
-            onClick={exportPredictions}
-            loading={exporting === 'predictions'}
-            leftIcon={exporting !== 'predictions' && <FileSpreadsheet className="h-4 w-4" />}
-          >
-            Export predictions (CSV)
-          </Button>
-          <Button
-            variant="secondary"
-            size="sm"
-            onClick={exportUsers}
-            loading={exporting === 'users'}
-            leftIcon={exporting !== 'users' && <Download className="h-4 w-4" />}
-          >
-            Export all users (CSV)
-          </Button>
+          <div className="mt-6 flex flex-wrap gap-2 border-t border-slate-200 pt-6 dark:border-zinc-800">
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={exportPredictions}
+              loading={exporting === 'predictions'}
+              leftIcon={
+                exporting !== 'predictions' && <FileSpreadsheet className="h-4 w-4" />
+              }
+            >
+              {t('admin.reports.export_predictions')}
+            </Button>
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={exportUsers}
+              loading={exporting === 'users'}
+              leftIcon={exporting !== 'users' && <Download className="h-4 w-4" />}
+            >
+              {t('admin.reports.export_users')}
+            </Button>
+          </div>
         </div>
-      </Card>
+      </section>
 
+      {/* Loading */}
       {loading && (
-        <Card className="flex items-center justify-center py-12">
-          <Loader2 className="h-6 w-6 animate-spin text-primary-500" />
-        </Card>
+        <div className="flex items-center justify-center border border-slate-200 bg-white py-16 dark:border-zinc-800 dark:bg-zinc-950">
+          <Loader2 className="h-6 w-6 animate-spin text-primary-600 dark:text-primary-400" />
+          <span className="ml-3 text-sm text-slate-600 dark:text-zinc-400">
+            {t('admin.reports.loading_report')}
+          </span>
+        </div>
       )}
 
       {report && !loading && (
         <>
           {/* Summary */}
           <div className="grid gap-4 sm:grid-cols-2">
-            <Card>
+            <div className="border border-slate-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-950">
               <div className="flex items-center justify-between">
-                <span className="text-sm font-medium text-slate-500 dark:text-zinc-500">
-                  Total predictions
+                <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-zinc-500">
+                  {t('admin.reports.summary_total')}
                 </span>
-                <Activity className="h-5 w-5 text-primary-500" />
+                <div className="flex h-9 w-9 items-center justify-center bg-primary-50 text-primary-600 dark:bg-primary-900/30 dark:text-primary-400">
+                  <Activity className="h-4 w-4" />
+                </div>
               </div>
-              <p className="mt-3 font-display text-3xl font-bold text-slate-900 dark:text-zinc-100">
-                {report.total_predictions}
+              <p className="mt-4 font-display text-4xl font-bold tabular-nums tracking-tight text-slate-900 dark:text-zinc-100">
+                {report.total_predictions.toLocaleString()}
               </p>
-              <p className="mt-1 text-xs text-slate-500 dark:text-zinc-500">
+              <p className="mt-2 font-mono text-xs text-slate-500 dark:text-zinc-500">
                 {report.start_date} → {report.end_date}
               </p>
-            </Card>
+            </div>
 
-            <Card>
+            <div className="border border-slate-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-950">
               <div className="flex items-center justify-between">
-                <span className="text-sm font-medium text-slate-500 dark:text-zinc-500">
-                  Unique users
+                <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-zinc-500">
+                  {t('admin.reports.summary_users')}
                 </span>
-                <UsersIcon className="h-5 w-5 text-info-500" />
+                <div className="flex h-9 w-9 items-center justify-center bg-info-50 text-info-600 dark:bg-info-500/10 dark:text-info-400">
+                  <UsersIcon className="h-4 w-4" />
+                </div>
               </div>
-              <p className="mt-3 font-display text-3xl font-bold text-slate-900 dark:text-zinc-100">
-                {report.unique_users}
+              <p className="mt-4 font-display text-4xl font-bold tabular-nums tracking-tight text-slate-900 dark:text-zinc-100">
+                {report.unique_users.toLocaleString()}
               </p>
-              <p className="mt-1 text-xs text-slate-500 dark:text-zinc-500">
-                Users who made predictions in this period
+              <p className="mt-2 text-xs text-slate-500 dark:text-zinc-500">
+                {t('admin.reports.summary_users')}
               </p>
-            </Card>
+            </div>
           </div>
 
-          {/* Daily breakdown */}
+          {/* Daily activity */}
           {report.daily_breakdown.length > 0 && (
-  <Card>
-    <h3 className="font-display text-lg font-bold text-slate-900 dark:text-zinc-100">
-      Daily predictions
-    </h3>
-    <p className="mt-1 text-xs text-slate-500 dark:text-zinc-500">
-      Max: {maxDaily}
-    </p>
+            <section className="border border-slate-200 bg-white shadow-sm dark:border-zinc-800 dark:bg-zinc-950">
+              <div className="border-b border-slate-200 p-6 dark:border-zinc-800 sm:p-8">
+                <h3 className="font-display text-lg font-bold text-slate-900 dark:text-zinc-100">
+                  {t('admin.reports.daily_title')}
+                </h3>
+                <p className="mt-1 text-xs text-slate-500 dark:text-zinc-500">
+                  {t('admin.reports.daily_max', { max: maxDaily })}
+                </p>
+              </div>
+              <div className="p-6 sm:p-8">
+                <div className="flex h-48 items-end gap-1 border-b border-slate-200 dark:border-zinc-800">
+                  {report.daily_breakdown.map((d) => {
+                    const heightPct = Math.max(4, (d.count / maxDaily) * 100);
+                    return (
+                      <div
+                        key={d.date}
+                        className="group flex h-full flex-1 flex-col items-center justify-end"
+                        title={`${d.date}: ${d.count}`}
+                      >
+                        <div
+                          className="w-full bg-primary-500 transition-colors group-hover:bg-primary-600"
+                          style={{ height: `${heightPct}%` }}
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className="mt-3 flex gap-1">
+                  {report.daily_breakdown.map((d, i) => {
+                    const step = Math.max(
+                      1,
+                      Math.ceil(report.daily_breakdown.length / 8)
+                    );
+                    return (
+                      <div key={d.date} className="flex-1 text-center">
+                        {i % step === 0 ? (
+                          <span className="font-mono text-[10px] text-slate-500 dark:text-zinc-500">
+                            {d.date.slice(5)}
+                          </span>
+                        ) : (
+                          <span className="text-[10px]">&nbsp;</span>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </section>
+          )}
 
-    <div className="mt-6 flex h-56 items-end justify-around gap-1 border-b border-slate-200 dark:border-zinc-800">
-      {report.daily_breakdown.map((d) => {
-        const heightPct = Math.max(4, (d.count / maxDaily) * 100);
-        return (
-          <div
-            key={d.date}
-            className="group flex h-full flex-col items-center justify-end gap-1"
-            style={{ minWidth: '20px', maxWidth: '60px', width: '100%' }}
-            title={`${d.date}: ${d.count}`}
-          >
-            <div
-              className="w-full rounded-t bg-gradient-to-t from-primary-600 to-primary-400 transition-all duration-500 ease-out group-hover:from-primary-700 group-hover:to-primary-500"
-              style={{ height: `${heightPct}%` }}
-            />
-          </div>
-        );
-      })}
-    </div>
-
-    <div className="mt-2 flex justify-around gap-1">
-      {report.daily_breakdown.map((d, i) => {
-        const showLabel = i % Math.ceil(report.daily_breakdown.length / 8) === 0;
-        return (
-          <div
-            key={d.date}
-            className="text-center"
-            style={{ minWidth: '20px', maxWidth: '60px', width: '100%' }}
-          >
-            {showLabel ? (
-              <span className="text-[10px] text-slate-500 dark:text-zinc-500">
-                {d.date.slice(5)}
-              </span>
-            ) : (
-              <span className="text-[10px]">&nbsp;</span>
-            )}
-          </div>
-        );
-      })}
-    </div>
-  </Card>
-)}
           {/* Top diseases */}
           {report.top_diseases.length > 0 && (
-            <Card>
-              <h3 className="font-display text-lg font-bold text-slate-900 dark:text-zinc-100">
-                Top predicted conditions
-              </h3>
-              <ul className="mt-5 space-y-2">
-                {report.top_diseases.map((d) => (
+            <section className="border border-slate-200 bg-white shadow-sm dark:border-zinc-800 dark:bg-zinc-950">
+              <div className="border-b border-slate-200 p-6 dark:border-zinc-800 sm:p-8">
+                <h3 className="font-display text-lg font-bold text-slate-900 dark:text-zinc-100">
+                  {t('admin.reports.top_diseases_title')}
+                </h3>
+              </div>
+              <ul className="divide-y divide-slate-100 dark:divide-zinc-800">
+                {report.top_diseases.map((d, i) => (
                   <li
                     key={d.disease}
-                    className="flex items-center justify-between border-b border-slate-100 py-2 last:border-0 dark:border-zinc-800"
+                    className="flex items-center gap-4 px-6 py-4 sm:px-8"
                   >
-                    <span className="capitalize text-slate-800 dark:text-zinc-200">
-                      {d.disease}
+                    <span className="flex h-7 w-7 shrink-0 items-center justify-center border border-slate-200 font-mono text-xs font-bold text-slate-500 dark:border-zinc-800 dark:text-zinc-500">
+                      {i + 1}
                     </span>
-                    <span className="font-semibold text-slate-600 dark:text-zinc-400">
-                      {d.count}
-                    </span>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center justify-between gap-4">
+                        <span className="truncate text-sm font-semibold capitalize text-slate-800 dark:text-zinc-200">
+                          {d.disease}
+                        </span>
+                        <span className="shrink-0 font-mono text-sm font-bold tabular-nums text-slate-600 dark:text-zinc-400">
+                          {d.count}
+                        </span>
+                      </div>
+                      <div className="mt-2 h-1 w-full overflow-hidden bg-slate-100 dark:bg-zinc-800">
+                        <div
+                          className="h-full bg-primary-500 transition-all duration-700"
+                          style={{ width: `${(d.count / maxDisease) * 100}%` }}
+                        />
+                      </div>
+                    </div>
                   </li>
                 ))}
               </ul>
-            </Card>
+            </section>
           )}
 
           {/* Language split */}
           {Object.keys(report.language_split).length > 0 && (
-            <Card>
-              <h3 className="font-display text-lg font-bold text-slate-900 dark:text-zinc-100">
-                Language distribution
-              </h3>
-              <div className="mt-4 flex gap-6">
+            <section className="border border-slate-200 bg-white shadow-sm dark:border-zinc-800 dark:bg-zinc-950">
+              <div className="border-b border-slate-200 p-6 dark:border-zinc-800 sm:p-8">
+                <h3 className="font-display text-lg font-bold text-slate-900 dark:text-zinc-100">
+                  {t('admin.reports.language_title')}
+                </h3>
+              </div>
+              <div className="grid grid-cols-2 divide-x divide-slate-100 dark:divide-zinc-800">
                 {Object.entries(report.language_split).map(([lang, count]) => (
-                  <div key={lang}>
-                    <p className="text-sm text-slate-500 dark:text-zinc-500">
-                      {lang === 'ny' ? 'Chichewa' : 'English'}
+                  <div key={lang} className="p-6 sm:p-8">
+                    <p className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-zinc-500">
+                      {lang === 'ny'
+                        ? t('admin.reports.language_ny')
+                        : t('admin.reports.language_en')}
                     </p>
-                    <p className="mt-1 font-display text-2xl font-bold text-slate-900 dark:text-zinc-100">
-                      {count}
+                    <p className="mt-3 font-display text-3xl font-bold tabular-nums tracking-tight text-slate-900 dark:text-zinc-100">
+                      {count.toLocaleString()}
                     </p>
                   </div>
                 ))}
               </div>
-            </Card>
+            </section>
+          )}
+
+          {/* Empty state */}
+          {report.total_predictions === 0 && (
+            <div className="border border-dashed border-slate-300 py-16 text-center dark:border-zinc-700">
+              <p className="text-sm text-slate-500 dark:text-zinc-500">
+                {t('admin.reports.empty')}
+              </p>
+            </div>
           )}
         </>
       )}

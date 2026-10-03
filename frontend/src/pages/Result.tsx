@@ -1,13 +1,22 @@
 import { useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { AlertTriangle, ArrowLeft, RefreshCw, ShieldCheck, Stethoscope, UserPlus } from 'lucide-react';
+import {
+  AlertTriangle,
+  ArrowLeft,
+  RefreshCw,
+  ShieldCheck,
+  Stethoscope,
+  UserPlus,
+  Phone,
+  TrendingUp,
+  Lock,
+} from 'lucide-react';
 import { Button } from '../components/ui/Button';
-import { Card } from '../components/ui/Card';
 import { ResultCard } from '../components/prediction/ResultCard';
-import { Badge } from '../components/ui/Badge';
 import { useAuthStore } from '../store/authStore';
 import type { PredictionResult } from '../types/prediction.types';
+import { cn } from '../utils/cn';
 
 export function Result() {
   const { t } = useTranslation();
@@ -25,145 +34,261 @@ export function Result() {
 
   if (!result) return null;
 
+  const maxAltConfidence = Math.max(
+    ...result.alternativeDiseases.map((a) => a.confidence),
+    0.01
+  );
+
   return (
-    <div className="container-app py-10 sm:py-16">
-      <div className="mx-auto max-w-3xl space-y-6">
-        <div className="flex items-center justify-between">
-          <Link to="/predict">
-            <Button variant="ghost" size="sm" leftIcon={<ArrowLeft className="h-4 w-4" />}>
-              {t('predict.buttons.back')}
-            </Button>
-          </Link>
-          <span className="text-xs font-medium uppercase tracking-wider text-slate-500 dark:text-zinc-500">
-            Model: {result.model}
-          </span>
-        </div>
-
-        {/* Top prediction */}
-        <ResultCard result={result} />
-
-        {/* Alternatives */}
-        {result.alternativeDiseases.length > 0 && (
-          <Card className="animate-fade-in">
-            <h3 className="font-display text-lg font-bold text-slate-900 dark:text-zinc-100">
-              {t('result.alt_title')}
-            </h3>
-            <ul className="mt-4 divide-y divide-slate-100 dark:divide-zinc-800">
-              {result.alternativeDiseases.map((alt) => (
-                <li key={alt.disease} className="flex items-center justify-between py-3">
-                  <span className="font-medium capitalize text-slate-800 dark:text-zinc-200">
-                    {alt.disease}
-                  </span>
-                  <Badge variant="default" size="sm">
-                    {(alt.confidence * 100).toFixed(1)}%
-                  </Badge>
-                </li>
-              ))}
-            </ul>
-          </Card>
-        )}
-
-        {/* Prevention */}
-        {result.prevention.length > 0 && (
-          <Card className="animate-fade-in">
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded bg-success-50 text-success-600 dark:bg-success-500/15 dark:text-success-500">
-                <ShieldCheck className="h-5 w-5" />
-              </div>
-              <h3 className="font-display text-lg font-bold text-slate-900 dark:text-zinc-100">
-                {t('result.prevention_title')}
-              </h3>
+    <div className="min-h-[calc(100vh-4rem)] bg-slate-50 dark:bg-zinc-950">
+      <div className="container-app py-10 lg:py-14">
+        <div className="mx-auto max-w-3xl space-y-6">
+          {/* Top bar */}
+          <div className="flex items-center justify-between">
+            <Link to="/predict">
+              <Button
+                variant="ghost"
+                size="sm"
+                leftIcon={<ArrowLeft className="h-4 w-4" />}
+              >
+                {t('predict.buttons.back')}
+              </Button>
+            </Link>
+            <div className="flex items-center gap-2 text-xs font-medium text-slate-500 dark:text-zinc-500">
+              <Lock className="h-3 w-3" />
+              <span>
+                {t('result.model_label')}: {result.model}
+              </span>
             </div>
-            <ul className="mt-5 space-y-4">
-              {result.prevention.map((item) => (
-                <li key={item.id} className="flex gap-3">
-                  <div className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary-500" />
-                  <div>
-                    <p className="font-semibold text-slate-900 dark:text-zinc-100">
-                      {item.title}
-                    </p>
-                    <p className="mt-0.5 text-sm text-slate-600 dark:text-zinc-400">
-                      {item.description}
-                    </p>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </Card>
-        )}
+          </div>
 
-        {/* Unknown symptoms warning */}
-        {result.unknownSymptoms.length > 0 && (
-          <Card className="border-warning-200 bg-warning-50 dark:border-warning-500/30 dark:bg-warning-500/10">
-            <div className="flex items-start gap-3">
+          {/* Hero result card */}
+          <ResultCard result={result} />
+
+          {/* Alternatives */}
+          {result.alternativeDiseases.length > 0 && (
+            <Section
+              label={t('result.alt_label')}
+              title={t('result.alt_title')}
+              subtitle={t('result.alt_subtitle')}
+            >
+              <ul className="divide-y divide-slate-100 dark:divide-zinc-800">
+                {result.alternativeDiseases.map((alt, i) => (
+                  <li
+                    key={alt.disease}
+                    className="flex items-center justify-between gap-4 py-4 first:pt-0 last:pb-0"
+                  >
+                    <div className="flex min-w-0 flex-1 items-center gap-3">
+                      <span className="flex h-7 w-7 shrink-0 items-center justify-center border border-slate-200 font-mono text-xs font-bold text-slate-500 dark:border-zinc-800 dark:text-zinc-500">
+                        {i + 2}
+                      </span>
+                      <div className="min-w-0 flex-1">
+                        <p className="truncate text-sm font-semibold capitalize text-slate-800 dark:text-zinc-200">
+                          {alt.disease}
+                        </p>
+                        <div className="mt-1.5 h-1 w-full overflow-hidden bg-slate-100 dark:bg-zinc-800">
+                          <div
+                            className="h-full bg-slate-400 transition-all duration-700 dark:bg-zinc-600"
+                            style={{
+                              width: `${(alt.confidence / maxAltConfidence) * 100}%`,
+                            }}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <span className="shrink-0 font-mono text-sm font-bold tabular-nums text-slate-700 dark:text-zinc-300">
+                      {(alt.confidence * 100).toFixed(1)}%
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </Section>
+          )}
+
+          {/* Prevention */}
+          {result.prevention.length > 0 && (
+            <Section
+              label={t('result.prevention_label')}
+              title={t('result.prevention_title')}
+              subtitle={t('result.prevention_subtitle')}
+              icon={<ShieldCheck className="h-5 w-5" />}
+            >
+              <ol className="space-y-4">
+                {result.prevention.map((item, i) => (
+                  <li
+                    key={item.id}
+                    className="group flex gap-4 border border-slate-200 bg-white p-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-primary-300 hover:shadow-md dark:border-zinc-800 dark:bg-zinc-950 dark:hover:border-primary-700"
+                  >
+                    <span className="flex h-7 w-7 shrink-0 items-center justify-center bg-primary-600 font-mono text-xs font-bold text-white">
+                      {i + 1}
+                    </span>
+                    <div>
+                      <p className="font-semibold text-slate-900 dark:text-zinc-100">
+                        {item.title}
+                      </p>
+                      <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-zinc-400">
+                        {item.description}
+                      </p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </Section>
+          )}
+
+          {/* Unknown symptoms */}
+          {result.unknownSymptoms.length > 0 && (
+            <div className="flex items-start gap-3 border border-warning-200 bg-warning-50 p-5 dark:border-warning-500/30 dark:bg-warning-500/10">
               <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-warning-600 dark:text-warning-400" />
               <div>
                 <p className="font-semibold text-warning-900 dark:text-warning-300">
-                  Some symptoms were not recognized
+                  {t('result.unknown_title')}
                 </p>
                 <p className="mt-1 text-sm text-warning-800 dark:text-warning-400">
-                  {result.unknownSymptoms.join(', ')}
+                  {t('result.unknown_desc')}
+                </p>
+                <div className="mt-2 flex flex-wrap gap-1.5">
+                  {result.unknownSymptoms.map((s) => (
+                    <span
+                      key={s}
+                      className="border border-warning-300 bg-white px-2 py-0.5 text-xs font-medium text-warning-800 dark:border-warning-500/40 dark:bg-warning-950/40 dark:text-warning-300"
+                    >
+                      {s}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Disclaimer */}
+          <div className="border-l-4 border-l-amber-500 border border-amber-200 bg-amber-50 p-5 dark:border-amber-500/30 dark:border-l-amber-500 dark:bg-amber-500/10">
+            <div className="flex items-start gap-3">
+              <Stethoscope className="mt-0.5 h-5 w-5 shrink-0 text-amber-600 dark:text-amber-400" />
+              <div>
+                <p className="font-semibold text-amber-900 dark:text-amber-300">
+                  {t('result.disclaimer_title')}
+                </p>
+                <p className="mt-1 text-sm text-amber-900/90 dark:text-amber-300/90">
+                  {t('result.disclaimer')}
                 </p>
               </div>
             </div>
-          </Card>
-        )}
+          </div>
 
-        {/* Disclaimer */}
-        <div className="flex items-start gap-3 rounded border border-amber-200 bg-amber-50 p-4 dark:border-amber-500/30 dark:bg-amber-500/10">
-          <Stethoscope className="mt-0.5 h-5 w-5 shrink-0 text-amber-600 dark:text-amber-400" />
-          <p className="text-sm text-amber-900 dark:text-amber-300">
-            {t('result.disclaimer')}
-          </p>
-        </div>
-
-        {/* Anonymous user nudge — only shown when not logged in */}
-        {!user && (
-          <Card className="border-primary-200 bg-primary-50 dark:border-primary-500/30 dark:bg-primary-500/10 animate-fade-in">
-            <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
-              <div className="flex items-start gap-3">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded bg-primary-500 text-white">
-                  <UserPlus className="h-5 w-5" />
+          {/* Anonymous nudge */}
+          {!user && (
+            <div className="animate-fade-in border border-primary-200 bg-primary-50 p-5 dark:border-primary-500/30 dark:bg-primary-500/10">
+              <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <div className="flex items-start gap-3">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center bg-primary-600 text-white">
+                    <UserPlus className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-primary-900 dark:text-primary-200">
+                      {t('result.signin_nudge_title')}
+                    </p>
+                    <p className="mt-1 text-sm text-primary-800 dark:text-primary-300">
+                      {t('result.signin_nudge_desc')}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <p className="font-semibold text-primary-900 dark:text-primary-200">
-                    Want to save this result?
-                  </p>
-                  <p className="mt-0.5 text-sm text-primary-800 dark:text-primary-300">
-                    Create a free account to keep a history of your health checks and track trends over time.
-                  </p>
+                <div className="flex shrink-0 gap-2">
+                  <Link to="/register">
+                    <Button size="sm" className="bg-primary-600 hover:bg-primary-700">
+                      {t('result.signin_nudge_cta')}
+                    </Button>
+                  </Link>
+                  <Link to="/login">
+                    <Button variant="secondary" size="sm">
+                      {t('result.signin_nudge_login')}
+                    </Button>
+                  </Link>
                 </div>
-              </div>
-              <div className="flex shrink-0 gap-2">
-                <Link to="/register">
-                  <Button variant="gradient" size="sm">
-                    Create account
-                  </Button>
-                </Link>
-                <Link to="/login">
-                  <Button variant="secondary" size="sm">
-                    Sign in
-                  </Button>
-                </Link>
               </div>
             </div>
-          </Card>
-        )}
+          )}
 
-        {/* Actions */}
-        <div className="flex flex-wrap justify-center gap-3 pt-4">
-          <Link to="/predict">
-            <Button variant="gradient" leftIcon={<RefreshCw className="h-4 w-4" />}>
-              {t('result.new_check')}
-            </Button>
-          </Link>
-          <a href="tel:+2651000000">
-            <Button variant="secondary" leftIcon={<AlertTriangle className="h-4 w-4" />}>
-              {t('result.call_helpline')}
-            </Button>
-          </a>
+          {/* Actions */}
+          <Section
+            label={t('result.actions')}
+            title={t('result.actions_desc')}
+            noPadding
+          >
+            <div className="grid gap-3 sm:grid-cols-3">
+              <Link to="/predict" className="block">
+                <button className="group flex h-full w-full flex-col items-center justify-center gap-2 border border-slate-200 bg-white p-5 text-center transition-all duration-200 hover:-translate-y-0.5 hover:border-primary-300 hover:shadow-md dark:border-zinc-800 dark:bg-zinc-950 dark:hover:border-primary-700">
+                  <RefreshCw className="h-5 w-5 text-primary-600 transition-transform duration-300 group-hover:rotate-180 dark:text-primary-400" />
+                  <span className="text-sm font-semibold text-slate-800 dark:text-zinc-200">
+                    {t('result.new_check')}
+                  </span>
+                </button>
+              </Link>
+
+              <a href="tel:+265983327425" className="block">
+                <button className="group flex h-full w-full flex-col items-center justify-center gap-2 border border-slate-200 bg-white p-5 text-center transition-all duration-200 hover:-translate-y-0.5 hover:border-info-300 hover:shadow-md dark:border-zinc-800 dark:bg-zinc-950 dark:hover:border-info-700">
+                  <Phone className="h-5 w-5 text-info-600 dark:text-info-400" />
+                  <span className="text-sm font-semibold text-slate-800 dark:text-zinc-200">
+                    {t('result.call_helpline')}
+                  </span>
+                </button>
+              </a>
+
+              <Link to="/" className="block">
+                <button className="group flex h-full w-full flex-col items-center justify-center gap-2 border border-slate-200 bg-white p-5 text-center transition-all duration-200 hover:-translate-y-0.5 hover:border-slate-400 hover:shadow-md dark:border-zinc-800 dark:bg-zinc-950 dark:hover:border-zinc-600">
+                  <ArrowLeft className="h-5 w-5 text-slate-600 dark:text-zinc-400" />
+                  <span className="text-sm font-semibold text-slate-800 dark:text-zinc-200">
+                    {t('result.back_home')}
+                  </span>
+                </button>
+              </Link>
+            </div>
+          </Section>
         </div>
       </div>
     </div>
+  );
+}
+
+/* ============================================
+   Reusable section wrapper — sharp, medical
+   ============================================ */
+function Section({
+  label,
+  title,
+  subtitle,
+  icon,
+  children,
+  noPadding,
+}: {
+  label: string;
+  title: string;
+  subtitle?: string;
+  icon?: React.ReactNode;
+  children: React.ReactNode;
+  noPadding?: boolean;
+}) {
+  return (
+    <section className="animate-fade-in border border-slate-200 bg-white shadow-sm dark:border-zinc-800 dark:bg-zinc-950">
+      <div className="border-b border-slate-200 p-6 dark:border-zinc-800 sm:p-8">
+        <div className="flex items-center gap-2">
+          {icon && (
+            <span className="text-primary-600 dark:text-primary-400">{icon}</span>
+          )}
+          <p className="text-xs font-bold uppercase tracking-wider text-primary-600 dark:text-primary-400">
+            {label}
+          </p>
+        </div>
+        <h2 className="mt-2 font-display text-xl font-bold text-slate-900 sm:text-2xl dark:text-zinc-100">
+          {title}
+        </h2>
+        {subtitle && (
+          <p className="mt-2 text-sm text-slate-600 dark:text-zinc-400">
+            {subtitle}
+          </p>
+        )}
+      </div>
+      <div className={noPadding ? '' : 'p-6 sm:p-8'}>{children}</div>
+    </section>
   );
 }

@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
-import { LogIn, Mail, Shield, User as UserIcon } from 'lucide-react';
+import { LogIn, Shield, User as UserIcon } from 'lucide-react';
 import { TextInput } from '../components/ui/TextInput';
 import { PasswordInput } from '../components/ui/PasswordInput';
 import { Button } from '../components/ui/Button';
-import { Card } from '../components/ui/Card';
+import { AuthSidebar } from '../components/auth/AuthSidebar';
 import { authService } from '../services/authService';
 import { useAuthStore } from '../store/authStore';
 import type { UserRole } from '../types/user.types';
@@ -28,9 +28,9 @@ export function Login() {
 
   const validate = () => {
     const e: typeof errors = {};
-    if (!email) e.email = 'Email is required';
-    else if (!/^\S+@\S+\.\S+$/.test(email)) e.email = 'Enter a valid email';
-    if (!password) e.password = 'Password is required';
+    if (!email) e.email = t('auth.login.error_email_required');
+    else if (!/^\S+@\S+\.\S+$/.test(email)) e.email = t('auth.login.error_email_invalid');
+    if (!password) e.password = t('auth.login.error_password_required');
     setErrors(e);
     return Object.keys(e).length === 0;
   };
@@ -42,92 +42,124 @@ export function Login() {
     try {
       const res = await authService.login({ email, password, role });
       setAuth(res.access_token, res.user);
-      toast.success(`Welcome back, ${res.user.full_name || res.user.email}`);
+      toast.success(
+        t('auth.login.welcome_back', {
+          name: res.user.full_name || res.user.email,
+        })
+      );
       const dest = from || (res.user.role === 'admin' ? '/admin' : '/dashboard');
       navigate(dest, { replace: true });
     } catch (err: any) {
       const detail = err?.response?.data?.detail;
-      toast.error(typeof detail === 'string' ? detail : 'Login failed');
+      toast.error(typeof detail === 'string' ? detail : t('auth.login.error_generic'));
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="container-app flex min-h-[80vh] items-center justify-center py-10">
-      <Card className="w-full max-w-md animate-fade-in">
-        <div className="text-center">
-          <h1 className="font-display text-3xl font-bold text-slate-900 dark:text-zinc-100">
-            Welcome back
+    <div className="grid min-h-[calc(100vh-4rem)] lg:grid-cols-2">
+      {/* Left: form */}
+      <div className="flex items-center justify-center bg-white px-4 py-12 dark:bg-zinc-950 sm:px-8">
+        <div className="w-full max-w-md">
+          {/* Eyebrow */}
+          <p className="text-xs font-bold uppercase tracking-wider text-primary-600 dark:text-primary-400">
+            {t('auth.login.eyebrow')}
+          </p>
+
+          {/* Heading */}
+          <h1 className="mt-3 font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl dark:text-zinc-100">
+            {t('auth.login.title')}
           </h1>
-          <p className="mt-2 text-slate-600 dark:text-zinc-400">
-            Sign in to your account
+          <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-zinc-400">
+            {t('auth.login.subtitle')}
+          </p>
+
+          {/* Role selector */}
+          <div className="mt-8">
+            <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-zinc-500">
+              {t('auth.login.role_label')}
+            </label>
+            <div className="grid grid-cols-2 gap-2">
+              {(
+                [
+                  { value: 'user' as const, label: t('auth.login.role_user'), Icon: UserIcon },
+                  { value: 'admin' as const, label: t('auth.login.role_admin'), Icon: Shield },
+                ]
+              ).map(({ value, label, Icon }) => (
+                <button
+                  key={value}
+                  type="button"
+                  onClick={() => setRole(value)}
+                  className={cn(
+                    'flex items-center justify-center gap-2 border px-3 py-3 text-sm font-semibold transition-all duration-200',
+                    role === value
+                      ? 'border-primary-600 bg-primary-600 text-white shadow-sm dark:border-primary-500 dark:bg-primary-500'
+                      : 'border-slate-200 bg-white text-slate-700 hover:border-primary-300 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-300 dark:hover:border-primary-700'
+                  )}
+                >
+                  <Icon className="h-4 w-4" />
+                  {label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Form */}
+          <form onSubmit={onSubmit} className="mt-6 space-y-4">
+            <TextInput
+              label={t('auth.login.email')}
+              type="email"
+              autoComplete="email"
+              placeholder={t('auth.login.email_placeholder')}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              error={errors.email}
+            />
+
+            <PasswordInput
+              label={t('auth.login.password')}
+              autoComplete="current-password"
+              placeholder={t('auth.login.password_placeholder')}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              error={errors.password}
+            />
+
+            <div className="flex items-center justify-end">
+              <Link
+                to="/forgot-password"
+                className="text-xs font-medium text-primary-600 hover:underline dark:text-primary-400"
+              >
+                {t('auth.login.forgot')}
+              </Link>
+            </div>
+
+            <Button
+              type="submit"
+              loading={loading}
+              className="w-full bg-primary-600 hover:bg-primary-700"
+              leftIcon={!loading && <LogIn className="h-4 w-4" />}
+            >
+              {loading ? t('auth.login.submitting') : t('auth.login.submit')}
+            </Button>
+          </form>
+
+          {/* Bottom link */}
+          <p className="mt-8 text-center text-sm text-slate-600 dark:text-zinc-400">
+            {t('auth.login.no_account')}{' '}
+            <Link
+              to="/register"
+              className="font-semibold text-primary-600 hover:underline dark:text-primary-400"
+            >
+              {t('auth.login.create_account')}
+            </Link>
           </p>
         </div>
+      </div>
 
-        {/* Role selector */}
-        <div className="mt-6 grid grid-cols-2 gap-2 rounded border border-slate-200 p-1 dark:border-zinc-800">
-          {(
-            [
-              { value: 'user', label: 'User', Icon: UserIcon },
-              { value: 'admin', label: 'Admin', Icon: Shield },
-            ] as const
-          ).map(({ value, label, Icon }) => (
-            <button
-              key={value}
-              type="button"
-              onClick={() => setRole(value)}
-              className={cn(
-                'flex items-center justify-center gap-2 rounded px-3 py-2.5 text-sm font-semibold transition-all',
-                role === value
-                  ? 'bg-primary-500 text-white shadow-soft'
-                  : 'text-slate-600 hover:bg-slate-50 dark:text-zinc-400 dark:hover:bg-zinc-800'
-              )}
-            >
-              <Icon className="h-4 w-4" />
-              {label}
-            </button>
-          ))}
-        </div>
-
-        <form onSubmit={onSubmit} className="mt-6 space-y-4">
-          <TextInput
-            label="Email"
-            type="email"
-            autoComplete="email"
-            placeholder="you@example.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            error={errors.email}
-          />
-
-          <PasswordInput
-            label="Password"
-            autoComplete="current-password"
-            placeholder="Enter your password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            error={errors.password}
-          />
-
-          <Button
-            type="submit"
-            variant="gradient"
-            loading={loading}
-            className="w-full"
-            leftIcon={!loading && <LogIn className="h-4 w-4" />}
-          >
-            {loading ? 'Signing in...' : `Sign in as ${role}`}
-          </Button>
-        </form>
-
-        <p className="mt-6 text-center text-sm text-slate-600 dark:text-zinc-400">
-          Don't have an account?{' '}
-          <Link to="/register" className="font-semibold text-primary-600 hover:underline dark:text-primary-400">
-            Create one
-          </Link>
-        </p>
-      </Card>
+      {/* Right: sidebar */}
+      <AuthSidebar />
     </div>
   );
 }
