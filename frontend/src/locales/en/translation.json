@@ -4,20 +4,22 @@
     "short": "Health AI",
     "tagline": "Check symptoms. Get guidance. Stay healthy."
   },
-  "nav": {
-    "home": "Home",
-    "predict": "Check Symptoms",
-    "history": "History",
-    "about": "About",
-    "login": "Login",
-    "logout": "Logout",
-    "register": "Register",
-    "dashboard": "Dashboard",
-    "admin": "Admin",
-    "settings": "Settings",
-    "stats": "My statistics",
-    "ussd": "USSD Access"
-  },
+ "nav": {
+  "home": "Home",
+  "predict": "Check Symptoms",
+  "history": "History",
+  "about": "About",
+  "login": "Login",
+  "logout": "Logout",
+  "register": "Register",
+  "dashboard": "Dashboard",
+  "admin": "Admin",
+  "admin_dashboard": "Admin Dashboard",
+  "settings": "Settings",
+  "stats": "My statistics",
+  "user": "User",
+  "ussd": "USSD Access"
+},
   "home": {
     "hero": {
       "eyebrow": "Ministry of Health · AI-assisted triage",
@@ -30,7 +32,8 @@
       "trust_free": "Free to use",
       "trust_no_app": "No app required",
       "trust_private": "Privacy protected",
-      "image_alt": "Health worker assisting a patient"
+      "image_alt": "Health worker assisting a patient",
+      "image_badge": "Real-time AI inference"
     },
     "stats": {
       "label": "System overview",
@@ -46,7 +49,7 @@
       "step1_title": "Describe your symptoms",
       "step1_desc": "Select from a list of common symptoms in English or Chichewa.",
       "step2_title": "AI analyzes your input",
-      "step2_desc": "Our model compares your symptoms against patterns of 11 Malawi-priority diseases.",
+      "step2_desc": "Our model compares your symptoms against patterns of 15 Malawi-priority diseases.",
       "step3_title": "Receive guidance",
       "step3_desc": "See likely conditions with confidence scores, plus prevention and care advice.",
       "cta": "Start your check"
@@ -109,9 +112,9 @@
   "q3": "Is my health data private?",
   "a3": "Yes. Your symptoms are processed securely and never shared with third parties. Creating an account is optional and only used to save your history.",
   "q4": "How accurate is the AI?",
-  "a4": "The model is trained on symptom patterns of 11 Malawi-priority diseases, with strong recall across all conditions. However, it is a guidance tool, not a diagnostic device.",
+  "a4": "The model is trained on symptom patterns of 15 Malawi-priority diseases, with strong recall across all conditions. However, it is a guidance tool, not a diagnostic device.",
   "q5": "Which diseases can it detect?",
-  "a5": "Malaria, typhoid, tuberculosis, dengue, five types of hepatitis, gastroenteritis, and pneumonia.",
+  "a5": "Malaria, typhoid, tuberculosis, dengue, five types of hepatitis, gastroenteritis, pneumonia and many more...",
   "q6": "Does it cost anything?",
   "a6": "No. The web version is free. USSD may incur standard network charges from your mobile operator, which are typically minimal."
 },
@@ -484,7 +487,7 @@
     "title": "Email address",
     "current": "Current email",
     "new": "New email",
-    "new_placeholder": "new@example.com",
+    "new_placeholder": "johnBandah@gmail.com",
     "password": "Confirm with your password",
     "password_placeholder": "Enter your password",
     "save": "Update email",
@@ -517,7 +520,7 @@
     "label": "Our mission",
     "title": "Bring early health guidance to every Malawian",
     "body": "Most digital health tools assume a smartphone, an internet connection, and fluency in English. Our system was designed from the ground up to work for the people most likely to be left behind — feature-phone users, rural communities, and Chichewa speakers.",
-    "stat1_value": "11",
+    "stat1_value": "15",
     "stat1_label": "Malawi-priority diseases",
     "stat2_value": "2",
     "stat2_label": "Languages supported",
@@ -530,7 +533,7 @@
     "step1_title": "1. Symptom intake",
     "step1_desc": "Users select from a curated list of symptoms via the web interface or the USSD menu. Inputs are validated and normalized before reaching the model.",
     "step2_title": "2. ML prediction",
-    "step2_desc": "Three models — XGBoost, Random Forest, and SVM — were trained on symptom-disease data filtered to 11 Malawi-priority conditions. XGBoost serves as the primary model in production.",
+    "step2_desc": "Three models — XGBoost, Random Forest, and SVM — were trained on symptom-disease data filtered to 15 Malawi-priority conditions. XGBoost serves as the primary model in production.",
     "step3_title": "3. Prevention layer",
     "step3_desc": "A rule-based engine maps the predicted disease to actionable prevention and care advice, tailored to the Malawian context and available in both English and Chichewa.",
     "step4_title": "4. Dual delivery",
@@ -574,7 +577,7 @@
   "contact_helpline": "Health helpline",
   "contact_helpline_number": "+265 9833 274 25",
   "contact_ministry": "Ministry of Health Malawi",
-  "contact_ministry_value": "https://health.gov.mw/",
+  "contact_ministry_value": "https://health.gov.mw",
   "disclaimer_title": "Important",
   "disclaimer": "This system is not a medical diagnosis. Always consult a qualified health worker for serious symptoms.",
   "copyright": "© {{year}} {{app}}. All rights reserved.",

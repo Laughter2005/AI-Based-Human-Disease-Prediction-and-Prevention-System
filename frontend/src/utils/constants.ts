@@ -1,5 +1,6 @@
 import type { Symptom } from '../types/symptom.types';
 
+
 export const SYMPTOMS: Symptom[] = [
   { id: 'fever',        name: 'Fever',        nameNy: 'Kutentha kwa thupi', category: 'general' },
   { id: 'headache',     name: 'Headache',     nameNy: 'Mutu',                category: 'neurological' },

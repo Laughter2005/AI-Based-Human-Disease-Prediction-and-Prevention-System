@@ -1,7 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { ChevronDown, LayoutDashboard, Settings, LogOut, Shield, BarChart3} from 'lucide-react';
+import {
+  ChevronDown,
+  LayoutDashboard,
+  Settings,
+  LogOut,
+  Shield,
+  BarChart3,
+} from 'lucide-react';
 import { useAuthStore } from '../../store/authStore';
 import { cn } from '../../utils/cn';
 
@@ -44,7 +51,7 @@ export function UserMenu() {
     <div ref={ref} className="relative">
       <button
         onClick={() => setOpen((o) => !o)}
-        className="inline-flex items-center gap-2 rounded border border-slate-200 bg-white p-1 pr-2.5 transition-colors hover:bg-slate-50 dark:border-zinc-700 dark:bg-zinc-900 dark:hover:bg-zinc-800"
+        className="inline-flex items-center gap-2 border border-slate-200 bg-white p-1 pr-2.5 transition-colors hover:bg-slate-50 dark:border-zinc-700 dark:bg-zinc-900 dark:hover:bg-zinc-800"
         aria-haspopup="menu"
         aria-expanded={open}
       >
@@ -52,10 +59,10 @@ export function UserMenu() {
           <img
             src={user.avatar_url}
             alt={user.full_name || user.email}
-            className="h-8 w-8 rounded object-cover"
+            className="h-8 w-8 object-cover"
           />
         ) : (
-          <div className="flex h-8 w-8 items-center justify-center rounded bg-primary-500 text-sm font-bold text-white">
+          <div className="flex h-8 w-8 items-center justify-center bg-primary-600 text-xs font-bold text-white">
             {initials(user.full_name, user.email)}
           </div>
         )}
@@ -65,8 +72,9 @@ export function UserMenu() {
       {open && (
         <div
           role="menu"
-          className="absolute right-0 z-50 mt-2 w-64 overflow-hidden rounded border border-slate-200 bg-white shadow-lifted dark:border-zinc-800 dark:bg-zinc-900 animate-fade-in"
+          className="absolute right-0 z-50 mt-2 w-64 overflow-hidden border border-slate-200 bg-white shadow-lg dark:border-zinc-800 dark:bg-zinc-950 animate-fade-in"
         >
+          {/* User info block */}
           <div className="border-b border-slate-200 p-3 dark:border-zinc-800">
             <p className="truncate text-sm font-semibold text-slate-900 dark:text-zinc-100">
               {user.full_name || user.email}
@@ -76,51 +84,52 @@ export function UserMenu() {
             </p>
             <span
               className={cn(
-                'mt-2 inline-block rounded-full px-2 py-0.5 text-xs font-semibold',
+                'mt-2 inline-block border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider',
                 user.role === 'admin'
-                  ? 'bg-primary-100 text-primary-700 dark:bg-primary-900/30 dark:text-primary-300'
-                  : 'bg-slate-100 text-slate-700 dark:bg-zinc-800 dark:text-zinc-300'
+                  ? 'border-primary-200 bg-primary-50 text-primary-700 dark:border-primary-800 dark:bg-primary-950 dark:text-primary-300'
+                  : 'border-slate-200 bg-slate-50 text-slate-700 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400'
               )}
             >
-              {user.role === 'admin' ? 'Administrator' : 'User'}
+              {user.role === 'admin' ? t('nav.admin') : t('nav.user')}
             </span>
           </div>
 
+          {/* Menu items */}
           <div className="p-1">
             <Link
               to={dashboardPath}
               onClick={() => setOpen(false)}
-              className="flex items-center gap-2.5 rounded px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 dark:text-zinc-300 dark:hover:bg-zinc-800"
+              className="flex items-center gap-2.5 px-3 py-2 text-sm text-slate-700 transition-colors hover:bg-slate-100 dark:text-zinc-300 dark:hover:bg-zinc-800"
             >
               {user.role === 'admin' ? (
                 <Shield className="h-4 w-4" />
               ) : (
                 <LayoutDashboard className="h-4 w-4" />
               )}
-              {user.role === 'admin' ? 'Admin Dashboard' : 'Dashboard'}
+              {user.role === 'admin' ? t('nav.admin_dashboard') : t('nav.dashboard')}
             </Link>
 
             <Link
               to="/stats"
               onClick={() => setOpen(false)}
-              className="flex items-center gap-2.5 rounded px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 dark:text-zinc-300 dark:hover:bg-zinc-800"
+              className="flex items-center gap-2.5 px-3 py-2 text-sm text-slate-700 transition-colors hover:bg-slate-100 dark:text-zinc-300 dark:hover:bg-zinc-800"
             >
               <BarChart3 className="h-4 w-4" />
-              My statistics
+              {t('nav.stats')}
             </Link>
 
             <Link
               to="/settings"
               onClick={() => setOpen(false)}
-              className="flex items-center gap-2.5 rounded px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 dark:text-zinc-300 dark:hover:bg-zinc-800"
+              className="flex items-center gap-2.5 px-3 py-2 text-sm text-slate-700 transition-colors hover:bg-slate-100 dark:text-zinc-300 dark:hover:bg-zinc-800"
             >
               <Settings className="h-4 w-4" />
-              Account settings
+              {t('nav.settings')}
             </Link>
 
             <button
               onClick={handleLogout}
-              className="flex w-full items-center gap-2.5 rounded px-3 py-2 text-left text-sm text-danger-600 hover:bg-danger-50 dark:text-danger-400 dark:hover:bg-danger-500/10"
+              className="flex w-full items-center gap-2.5 px-3 py-2 text-left text-sm text-danger-600 transition-colors hover:bg-danger-50 dark:text-danger-400 dark:hover:bg-danger-500/10"
             >
               <LogOut className="h-4 w-4" />
               {t('nav.logout')}

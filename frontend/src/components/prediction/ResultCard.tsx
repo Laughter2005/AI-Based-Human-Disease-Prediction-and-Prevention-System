@@ -3,14 +3,16 @@ import { SeverityBadge } from '../ui/SeverityBadge';
 import { useTranslation } from 'react-i18next';
 import type { PredictionResult } from '../../types/prediction.types';
 import { cn } from '../../utils/cn';
+import { translateDisease } from '../../utils/diseaseNames';
 
 interface ResultCardProps {
   result: PredictionResult;
 }
 
 export function ResultCard({ result }: ResultCardProps) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { predictedDisease } = result;
+  const diseaseName = translateDisease(predictedDisease.name, i18n.language);
   const pct = predictedDisease.confidence * 100;
 
   const accent =
@@ -51,8 +53,8 @@ export function ResultCard({ result }: ResultCardProps) {
           <p className="mt-1 text-xs uppercase tracking-wider text-slate-400 dark:text-zinc-600">
             {t('result.title')}
           </p>
-          <h2 className="mt-3 font-display text-3xl font-bold capitalize leading-tight text-slate-900 sm:text-4xl dark:text-zinc-100">
-            {predictedDisease.name}
+            <h2 className="mt-3 font-display text-3xl font-bold capitalize leading-tight text-slate-900 sm:text-4xl dark:text-zinc-100">
+            {diseaseName}
           </h2>
         </div>
         <div className="flex h-14 w-14 shrink-0 items-center justify-center border-2 border-primary-600 bg-primary-50 text-primary-600 dark:border-primary-500 dark:bg-primary-950 dark:text-primary-400">

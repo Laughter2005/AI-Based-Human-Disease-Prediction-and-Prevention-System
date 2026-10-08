@@ -39,7 +39,7 @@ export interface PredictionResult {
 
 export interface PreventionItem {
   id: string;
-  title: string;
-  description: string;
+  title: { en: string; ny: string };
+  description: { en: string; ny: string };
   category: 'hygiene' | 'diet' | 'environment' | 'medical' | 'lifestyle';
 }

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { translateDisease } from '../utils/diseaseNames';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
@@ -17,7 +18,7 @@ import { predictionService, type HistoryItem } from '../services/predictionServi
 import { cn } from '../utils/cn';
 
 export function Dashboard() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { user } = useAuthStore();
   const [recent, setRecent] = useState<HistoryItem[]>([]);
   const [loading, setLoading] = useState(true);
@@ -218,7 +219,7 @@ export function Dashboard() {
                       </div>
                       <div className="min-w-0">
                         <p className="truncate font-semibold capitalize text-slate-900 dark:text-zinc-100">
-                          {item.top_disease}
+                          {translateDisease(item.top_disease, i18n.language)}
                         </p>
                         <p className="truncate text-xs text-slate-500 dark:text-zinc-500">
                           {new Date(item.created_at).toLocaleString()}

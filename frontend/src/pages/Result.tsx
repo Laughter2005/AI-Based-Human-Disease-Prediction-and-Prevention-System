@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { translateDisease } from '../utils/diseaseNames';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
@@ -19,7 +20,7 @@ import type { PredictionResult } from '../types/prediction.types';
 import { cn } from '../utils/cn';
 
 export function Result() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
   const { user } = useAuthStore();
@@ -83,8 +84,8 @@ export function Result() {
                         {i + 2}
                       </span>
                       <div className="min-w-0 flex-1">
-                        <p className="truncate text-sm font-semibold capitalize text-slate-800 dark:text-zinc-200">
-                          {alt.disease}
+                        <p className="truncate text-sm font-semibold ...">
+                          {translateDisease(alt.disease, i18n.language)}
                         </p>
                         <div className="mt-1.5 h-1 w-full overflow-hidden bg-slate-100 dark:bg-zinc-800">
                           <div
@@ -106,35 +107,27 @@ export function Result() {
           )}
 
           {/* Prevention */}
-          {result.prevention.length > 0 && (
-            <Section
-              label={t('result.prevention_label')}
-              title={t('result.prevention_title')}
-              subtitle={t('result.prevention_subtitle')}
-              icon={<ShieldCheck className="h-5 w-5" />}
-            >
-              <ol className="space-y-4">
-                {result.prevention.map((item, i) => (
-                  <li
-                    key={item.id}
-                    className="group flex gap-4 border border-slate-200 bg-white p-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-primary-300 hover:shadow-md dark:border-zinc-800 dark:bg-zinc-950 dark:hover:border-primary-700"
-                  >
-                    <span className="flex h-7 w-7 shrink-0 items-center justify-center bg-primary-600 font-mono text-xs font-bold text-white">
-                      {i + 1}
-                    </span>
-                    <div>
-                      <p className="font-semibold text-slate-900 dark:text-zinc-100">
-                        {item.title}
-                      </p>
-                      <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-zinc-400">
-                        {item.description}
-                      </p>
-                    </div>
-                  </li>
-                ))}
-              </ol>
-            </Section>
-          )}
+          {result.prevention.map((item, i) => {
+  const lang: 'en' | 'ny' = i18n.language === 'ny' ? 'ny' : 'en';
+  return (
+    <li
+      key={item.id}
+      className="group flex gap-4 border border-slate-200 bg-white p-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-primary-300 hover:shadow-md dark:border-zinc-800 dark:bg-zinc-950 dark:hover:border-primary-700"
+    >
+      <span className="flex h-7 w-7 shrink-0 items-center justify-center bg-primary-600 font-mono text-xs font-bold text-white">
+        {i + 1}
+      </span>
+      <div>
+        <p className="font-semibold text-slate-900 dark:text-zinc-100">
+          {item.title[lang]}
+        </p>
+        <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-zinc-400">
+          {item.description[lang]}
+        </p>
+      </div>
+    </li>
+  );
+})}
 
           {/* Unknown symptoms */}
           {result.unknownSymptoms.length > 0 && (

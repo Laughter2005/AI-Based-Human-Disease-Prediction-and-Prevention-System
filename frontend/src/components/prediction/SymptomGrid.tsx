@@ -1,7 +1,8 @@
 import { useMemo, useState } from 'react';
 import { Search, X, Loader2 } from 'lucide-react';
-import { SymptomCard } from './SymptomCard';
 import { useTranslation } from 'react-i18next';
+import { SymptomCard } from './SymptomCard';
+import { translateSymptom } from '../../utils/symptomNames';
 import { cn } from '../../utils/cn';
 
 interface SymptomGridProps {
@@ -12,40 +13,60 @@ interface SymptomGridProps {
   loading?: boolean;
 }
 
-/**
- * Categorize symptoms by keyword. Falls back to "other" for anything else.
- * Categories are shown as section headers when a search query isn't active.
- */
-const CATEGORIES: { key: string; label: string; keywords: string[] }[] = [
+const CATEGORIES: { key: string; labelEn: string; labelNy: string; keywords: string[] }[] = [
   {
     key: 'general',
-    label: 'General',
-    keywords: ['fever', 'fatigue', 'chills', 'body', 'malaise', 'weakness', 'weight'],
+    labelEn: 'General',
+    labelNy: 'Zonse',
+    keywords: ['fever', 'fatigue', 'chills', 'body', 'malaise', 'weakness', 'weight', 'sweat', 'lethargy', 'restless', 'shiver'],
   },
   {
     key: 'respiratory',
-    label: 'Respiratory',
-    keywords: ['cough', 'nose', 'throat', 'breath', 'chest', 'sneeze', 'congestion', 'phlegm'],
+    labelEn: 'Respiratory',
+    labelNy: 'Kupuma',
+    keywords: ['cough', 'nose', 'throat', 'breath', 'chest', 'sneeze', 'congestion', 'phlegm', 'sputum', 'sinus', 'mucoid', 'rusty'],
   },
   {
     key: 'gastro',
-    label: 'Digestive',
-    keywords: ['vomit', 'nausea', 'stomach', 'diarrh', 'constipat', 'abdomen', 'appetite', 'belly'],
+    labelEn: 'Digestive',
+    labelNy: 'M\'mimba',
+    keywords: ['vomit', 'nausea', 'stomach', 'diarrh', 'constipat', 'abdomen', 'appetite', 'belly', 'indigest', 'acidity', 'bleed', 'bloody', 'bowel', 'anal', 'gases', 'dehydrat'],
   },
   {
     key: 'neuro',
-    label: 'Neurological',
-    keywords: ['head', 'dizz', 'confus', 'seizure', 'vision', 'memory', 'numb'],
+    labelEn: 'Neurological',
+    labelNy: 'Maganizo ndi minyewa',
+    keywords: ['head', 'dizz', 'confus', 'seizure', 'vision', 'memory', 'numb', 'balance', 'smell', 'concentrat', 'speech', 'coma', 'stiff', 'slurred', 'spin', 'unstead'],
   },
   {
     key: 'skin',
-    label: 'Skin',
-    keywords: ['rash', 'itch', 'skin', 'spot', 'bruis', 'sweat', 'yellow'],
+    labelEn: 'Skin',
+    labelNy: 'Pakhungu',
+    keywords: ['rash', 'itch', 'skin', 'spot', 'bruis', 'yellow', 'blister', 'pimple', 'blackhead', 'scurr', 'silver', 'crust', 'nodal', 'peeling', 'sore'],
   },
   {
     key: 'joint',
-    label: 'Muscular & Joint',
-    keywords: ['joint', 'muscle', 'back', 'neck', 'stiff', 'swell'],
+    labelEn: 'Muscular & Joint',
+    labelNy: 'Minofu ndi mafupa',
+    keywords: ['joint', 'muscle', 'back', 'neck', 'stiff', 'swell', 'hip', 'knee', 'cramp', 'walking', 'vein', 'calf', 'limb'],
+  },
+  {
+    key: 'urinary',
+    labelEn: 'Urinary',
+    labelNy: 'Mkodzo',
+    keywords: ['urine', 'urination', 'bladder', 'micturition', 'polyuria', 'spotting'],
+  },
+  {
+    key: 'heart',
+    labelEn: 'Heart & Circulation',
+    labelNy: 'Mtima ndi magazi',
+    keywords: ['heart', 'palpitat', 'fluid', 'pressure', 'blood', 'transfusion', 'injection'],
+  },
+  {
+    key: 'endocrine',
+    labelEn: 'Hormones & Metabolic',
+    labelNy: 'Mahomoni',
+    keywords: ['sugar', 'thyroid', 'hunger', 'appetite', 'menstruation', 'lips'],
   },
 ];
 
@@ -64,14 +85,19 @@ export function SymptomGrid({
   onClear,
   loading,
 }: SymptomGridProps) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [query, setQuery] = useState('');
+  const lang: 'en' | 'ny' = i18n.language === 'ny' ? 'ny' : 'en';
 
   const filtered = useMemo(() => {
-    const q = query.trim().toLowerCase().replace(/\s+/g, '_');
+    const q = query.trim().toLowerCase();
     if (!q) return symptoms;
-    return symptoms.filter((s) => s.toLowerCase().includes(q));
-  }, [symptoms, query]);
+    return symptoms.filter((s) => {
+      if (s.toLowerCase().includes(q)) return true;
+      const translated = translateSymptom(s, i18n.language).toLowerCase();
+      return translated.includes(q);
+    });
+  }, [symptoms, query, i18n.language]);
 
   const grouped = useMemo(() => {
     const groups: Record<string, string[]> = {};
@@ -150,14 +176,14 @@ export function SymptomGrid({
 
       {/* Grouped grid */}
       {!hasQuery &&
-        CATEGORIES.concat([{ key: 'other', label: 'Other', keywords: [] }]).map((cat) => {
+        CATEGORIES.concat([{ key: 'other', labelEn: 'Other', labelNy: 'Zina', keywords: [] }]).map((cat) => {
           const items = grouped[cat.key];
           if (!items || items.length === 0) return null;
           return (
             <div key={cat.key} className="mb-6 last:mb-0">
               <div className="mb-3 flex items-center gap-3">
                 <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-zinc-500">
-                  {cat.label}
+                  {lang === 'ny' ? cat.labelNy : cat.labelEn}
                 </h3>
                 <div className="h-px flex-1 bg-slate-200 dark:bg-zinc-800" />
               </div>
@@ -166,7 +192,6 @@ export function SymptomGrid({
                   <SymptomCard
                     key={s}
                     id={s}
-                    label={s}
                     selected={selected.includes(s)}
                     onToggle={onToggle}
                   />
@@ -183,7 +208,6 @@ export function SymptomGrid({
             <SymptomCard
               key={s}
               id={s}
-              label={s}
               selected={selected.includes(s)}
               onToggle={onToggle}
             />

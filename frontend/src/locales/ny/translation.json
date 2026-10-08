@@ -2,22 +2,24 @@
   "app": {
     "name": "Malawi Health AI",
     "short": "Health AI",
-    "tagline": "Yang'ana zizindikiro. Peza chithandizo. Khalani wathanzi."
+    "tagline": "Yang'anani zizindikiro. Pezani chithandizo. Khalani wathanzi."
   },
   "nav": {
-    "home": "Kunyumba",
-    "predict": "Yang'ana Zizindikiro",
-    "history": "Mbiri",
-    "about": "Za Ife",
-    "login": "Lowani",
-    "logout": "Tulukani",
-    "register": "Lembetsani",
-    "dashboard": "Dashboard",
-    "admin": "Woyang'anira",
-    "settings": "Zokonda",
-    "stats": "Ziwerengero zanga",
-    "ussd": "Njira ya USSD"
-  },
+  "home": "Kunyumba",
+  "predict": "Yang'ana Zizindikiro",
+  "history": "Mbiri",
+  "about": "Za Ife",
+  "login": "Lowani",
+  "logout": "Tulukani",
+  "register": "Lembetsani",
+  "dashboard": "Dachibodi",
+  "admin": "Woyang'anira",
+  "admin_dashboard": "Dachibodi ya Woyang'anira",
+  "settings": "Zokonda za akaunti",
+  "stats": "Ziwerengero zanga",
+  "user": "Wogwiritsa",
+  "ussd": "Njira ya USSD"
+},
   "home": {
     "hero": {
       "eyebrow": "Unduna wa Zaumoyo · Chithandizo cha AI",
@@ -30,7 +32,8 @@
       "trust_free": "Kwaulere",
       "trust_no_app": "Palibe pulogalamu",
       "trust_private": "Zachinsinsi zotetezedwa",
-      "image_alt": "Wothandizira wa zaumoyo akuthandiza wodwala"
+      "image_alt": "Wothandizira wa zaumoyo akuthandiza wodwala",
+      "image_badge": "Kufufuza kwa AI mwamsanga"
     },
     "stats": {
       "label": "Chiwerengero cha dongosolo",
@@ -46,7 +49,7 @@
       "step1_title": "Fotokozani zizindikiro zanu",
       "step1_desc": "Sankhani m'ndandanda wa zizindikiro zodziwika bwino mu Chingerezi kapena Chichewa.",
       "step2_title": "AI imafufuza",
-      "step2_desc": "Modeli yathu imayerekeza zizindikiro zanu ndi mitundu ya matenda 11 ofunika kwambiri ku Malawi.",
+      "step2_desc": "Modeli yathu imayerekeza zizindikiro zanu ndi mitundu ya matenda 15 ofunika kwambiri ku Malawi.",
       "step3_title": "Landirani chithandizo",
       "step3_desc": "Onani matenda otheka ndi kukhulupirika kwake, pamodzi ndi malangizo a kupewa ndi chisamaliro.",
       "cta": "Yambani kuyang'ana kwanu"
@@ -87,7 +90,7 @@
     },
 
   "testimonials": {
-  "label": "Zomwe ogwiritsa akunena",
+  "label": "Ma Umboni",
   "title": "Amakhulupirira ndi ogwira ntchito zaumoyo ndi odwala",
   "quote1": "Zinandiuza kuti ndifunse chithandizo mwamsanga — ndinapita ku chipatala ndipo ndinathandizidwa ndi malungo msanga.",
   "quote1_name": "Chikondi M.",
@@ -109,9 +112,9 @@
   "q3": "Kodi zambiri zanga zaumoyo ndi zachinsinsi?",
   "a3": "Inde. Zizindikiro zanu zimapangidwa motetezeka ndipo sizigawidwa ndi anthu ena. Kupanga akaunti ndikosankha ndipo kumangogwiritsidwa ntchito kusunga mbiri yanu.",
   "q4": "Kodi AI ndi yolondola bwanji?",
-  "a4": "Modeli yaphunzitsidwa pa zizindikiro za matenda 11 ofunika ku Malawi. Komabe, ndi chida chotsogolera, osati chida choyezera.",
+  "a4": "Modeli yaphunzitsidwa pa zizindikiro za matenda 15 ofunika ku Malawi. Komabe, ndi chida chotsogolera, osati chida choyezera.",
   "q5": "Kodi ndi matenda ati omwe imatha kuzindikira?",
-  "a5": "Malungo, typhoid, chifuwa chachikulu, dengue, mitundu isanu ya hepatitis, kutsegula m'mimba, ndi nimonia.",
+  "a5": "Malungo, typhoid, chifuwa chachikulu, dengue, mitundu isanu ya hepatitis, kutsegula m'mimba, nimonia, Ndi ena ambiri..",
   "q6": "Kodi zimatenga ndalama?",
   "a6": "Ayi. Web ndi yaulere. USSD ikhoza kutenga ndalama zochepa kuchokera kwa opareshoni wa foni."
 },
@@ -216,7 +219,7 @@
     "role_user": "Wodwala",
     "role_admin": "Woyang'anira",
     "email": "Imelo",
-    "email_placeholder": "inu@chitsanzo.com",
+    "email_placeholder": "johnBandah@gmail.com",
     "password": "Achinsinsi",
     "password_placeholder": "Lowetsani achinsinsi anu",
     "forgot": "Mwayiwala achinsinsi?",
@@ -517,7 +520,7 @@
     "label": "Cholinga chathu",
     "title": "Kubweretsa chithandizo cha thanzi kwa Mmalawi aliyense",
     "body": "Zipangizo zambiri za thanzi zimagwiritsa ntchito smartphone, intaneti, ndi Chingerezi. Dongosolo lathu linapangidwa kuti ligwire ntchito kwa anthu omwe amasiyidwa — ogwiritsa foni wamba, akumidzi, ndi olankhula Chichewa.",
-    "stat1_value": "11",
+    "stat1_value": "15",
     "stat1_label": "Matenda ofunika ku Malawi",
     "stat2_value": "2",
     "stat2_label": "Zinenero zothandizidwa",
@@ -530,7 +533,7 @@
     "step1_title": "1. Kutenga zizindikiro",
     "step1_desc": "Ogwiritsa amasankha m'ndandanda wa zizindikiro pa web kapena pa USSD. Zolowa zimatsimikiziridwa asanafike ku modeli.",
     "step2_title": "2. Kulosera kwa ML",
-    "step2_desc": "Modeli zitatu — XGBoost, Random Forest, ndi SVM — zinaphunzitsidwa pa zizindikiro za matenda 11 ofunika ku Malawi. XGBoost imagwira ntchito yayikulu.",
+    "step2_desc": "Modeli zitatu — XGBoost, Random Forest, ndi SVM — zinaphunzitsidwa pa zizindikiro za matenda 15 ofunika ku Malawi. XGBoost imagwira ntchito yayikulu.",
     "step3_title": "3. Chigawo cha kupewa",
     "step3_desc": "Dongosolo la malamulo limagwirizanitsa matenda omwe angakhale ndi malangizo a kupewa, mu Chingerezi ndi Chichewa.",
     "step4_title": "4. Njira ziwiri",
@@ -574,7 +577,7 @@
   "contact_helpline": "Foni yothandizira zaumoyo",
   "contact_helpline_number": "+265 9833 274 25",
   "contact_ministry": "Unduna wa Zaumoyo Malawi",
-  "contact_ministry_value": "https://health.gov.mw/",
+  "contact_ministry_value": "https://health.gov.mw",
   "disclaimer_title": "Chofunika",
   "disclaimer": "Dongosolo ili si kuyeza kwa dokotala. Nthawi zonse funsani wothandizira wa zaumoyo woyenerera.",
   "copyright": "© {{year}} {{app}}. Ufulu wonse wasungidwa.",

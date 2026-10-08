@@ -1,14 +1,18 @@
 import { Check } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import { translateSymptom } from '../../utils/symptomNames';
 import { cn } from '../../utils/cn';
 
 interface SymptomCardProps {
   id: string;
-  label: string;
   selected: boolean;
   onToggle: (id: string) => void;
 }
 
-export function SymptomCard({ id, label, selected, onToggle }: SymptomCardProps) {
+export function SymptomCard({ id, selected, onToggle }: SymptomCardProps) {
+  const { i18n } = useTranslation();
+  const label = translateSymptom(id, i18n.language);
+
   return (
     <button
       type="button"
@@ -35,13 +39,13 @@ export function SymptomCard({ id, label, selected, onToggle }: SymptomCardProps)
       </span>
       <span
         className={cn(
-          'text-sm font-medium capitalize transition-colors',
+          'text-sm font-medium transition-colors',
           selected
             ? 'text-primary-900 dark:text-primary-100'
             : 'text-slate-800 group-hover:text-slate-900 dark:text-zinc-200 dark:group-hover:text-zinc-100'
         )}
       >
-        {label.replace(/_/g, ' ')}
+        {label}
       </span>
     </button>
   );

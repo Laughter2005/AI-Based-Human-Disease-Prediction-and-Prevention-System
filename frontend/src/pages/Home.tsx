@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { translateDisease } from '../utils/diseaseNames';
 import { useTranslation } from 'react-i18next';
 import {
   ArrowRight,
@@ -31,7 +32,7 @@ import { cn } from '../utils/cn';
 import heroImage from '../assets/hero-image.jpg';
 const HERO_IMAGE_URL = heroImage;
 
-const MALAWI_DISEASES = [
+const MALAWI_DISEASE_IDS = [
   'Malaria',
   'Typhoid',
   'Tuberculosis',
@@ -43,6 +44,10 @@ const MALAWI_DISEASES = [
   'Hepatitis E',
   'Gastroenteritis',
   'Pneumonia',
+  'Hypothyroidism',
+  'Hypertension',
+  'Diabetes',
+  'Cholera'
 ];
 
 export function Home() {
@@ -159,8 +164,8 @@ function HeroSection() {
             <div className="absolute bottom-3 left-3 flex items-center gap-2 border-l-4 border-primary-600 bg-white px-2.5 py-1.5 text-xs font-semibold shadow-md dark:bg-zinc-900">
               <Activity className="h-3.5 w-3.5 text-primary-600 dark:text-primary-400" />
               <span className="text-slate-800 dark:text-zinc-200">
-                Real-time AI inference
-              </span>
+              {t('home.hero.image_badge')}
+            </span>
             </div>
           </div>
 
@@ -354,7 +359,7 @@ function HowItWorksSection() {
    5. DISEASES
    ============================================ */
 function DiseasesSection() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { ref, visible } = useScrollReveal<HTMLDivElement>();
 
   return (
@@ -376,9 +381,9 @@ function DiseasesSection() {
         </div>
 
         <div className="mx-auto mt-14 grid max-w-5xl grid-cols-2 gap-3 sm:grid-cols-3 lg:mt-16 lg:grid-cols-4">
-          {MALAWI_DISEASES.map((name, i) => (
+          {MALAWI_DISEASE_IDS.map((id, i) => (
             <div
-              key={name}
+              key={id}
               className={cn(
                 'group flex items-center gap-3 border border-slate-200 bg-white px-4 py-3 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary-400 hover:shadow-md dark:border-zinc-800 dark:bg-zinc-950 dark:hover:border-primary-600',
                 visible ? 'opacity-100' : 'opacity-0'
@@ -387,7 +392,7 @@ function DiseasesSection() {
             >
               <span className="h-2 w-2 bg-primary-500 transition-transform duration-300 group-hover:scale-150" />
               <span className="text-sm font-medium text-slate-800 dark:text-zinc-200">
-                {name}
+                {translateDisease(id, i18n.language)}
               </span>
             </div>
           ))}

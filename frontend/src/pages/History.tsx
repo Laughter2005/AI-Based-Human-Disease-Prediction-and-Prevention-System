@@ -1,4 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
+import { translateDisease } from '../utils/diseaseNames';
+import { translateSymptom } from '../utils/symptomNames';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
@@ -22,7 +24,7 @@ function deriveSeverity(confidence: number): 'low' | 'moderate' | 'high' {
 }
 
 export function History() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [items, setItems] = useState<HistoryItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
@@ -197,10 +199,11 @@ export function History() {
                             </div>
                             <div className="min-w-0 flex-1">
                               <div className="flex flex-wrap items-center gap-2">
-                                <h3 className="truncate font-display text-lg font-bold capitalize text-slate-900 dark:text-zinc-100">
-                                  {item.top_disease}
-                                </h3>
-                                <span className={cn('border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider', sevConfig)}>
+                                
+                               <h3 className="truncate font-display text-lg font-bold ...">
+                                 {translateDisease(item.top_disease, i18n.language)}
+                               </h3>
+                                     <span className={cn('border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider', sevConfig)}>
                                   {t(`result.severity_${severity}`)}
                                 </span>
                               </div>
@@ -238,14 +241,14 @@ export function History() {
                                   {t('history.detail_symptoms')}
                                 </p>
                                 <div className="mt-3 flex flex-wrap gap-1.5">
-                                  {item.symptoms.map((s) => (
-                                    <span
-                                      key={s}
-                                      className="border border-slate-200 bg-slate-50 px-2 py-0.5 text-xs font-medium capitalize text-slate-700 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300"
-                                    >
-                                      {s.replace(/_/g, ' ')}
-                                    </span>
-                                  ))}
+                                 {item.symptoms.map((s) => (
+                                   <span
+                                     key={s}
+                                     className="border border-slate-200 bg-slate-50 px-2 py-0.5 text-xs font-medium text-slate-700 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300"
+                                   >
+                                     {translateSymptom(s, i18n.language)}
+                                   </span>
+                                 ))}                                 
                                 </div>
 
                                 {item.unknown_symptoms.length > 0 && (
@@ -259,7 +262,7 @@ export function History() {
                                           key={s}
                                           className="border border-warning-200 bg-warning-50 px-2 py-0.5 text-xs font-medium text-warning-700 dark:border-warning-500/30 dark:bg-warning-500/10 dark:text-warning-400"
                                         >
-                                          {s}
+                                          {translateSymptom(s, i18n.language)}
                                         </span>
                                       ))}
                                     </div>

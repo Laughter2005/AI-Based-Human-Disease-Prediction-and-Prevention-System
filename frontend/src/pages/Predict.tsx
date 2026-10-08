@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { translateSymptom } from '../utils/symptomNames';
 import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
 import {
@@ -16,6 +17,7 @@ import { Button } from '../components/ui/Button';
 import { usePrediction } from '../hooks/usePrediction';
 import api from '../services/api';
 import { cn } from '../utils/cn';
+import i18n from '../utils/i18n';
 
 const DURATIONS = ['less_1', '1_3', '4_7', 'more_1w'] as const;
 const GENDERS = ['male', 'female', 'other'] as const;
@@ -418,8 +420,7 @@ function Step3Review({
                 key={s}
                 className="inline-flex items-center gap-1.5 border border-primary-200 bg-primary-50 px-2.5 py-1 text-xs font-medium capitalize text-primary-700 dark:border-primary-800 dark:bg-primary-950/40 dark:text-primary-300"
               >
-                <Check className="h-3 w-3" strokeWidth={3} />
-                {s.replace(/_/g, ' ')}
+                {translateSymptom(s, i18n.language)}
               </span>
             ))
           )}

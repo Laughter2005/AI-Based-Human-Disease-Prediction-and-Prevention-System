@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { translateDisease } from '../utils/diseaseNames';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
@@ -13,7 +14,7 @@ import { statsService, type UserStats } from '../services/statsService';
 import { cn } from '../utils/cn';
 
 export function Stats() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [stats, setStats] = useState<UserStats | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -241,7 +242,7 @@ export function Stats() {
                         <div className="min-w-0 flex-1">
                           <div className="flex items-center justify-between gap-4">
                             <span className="truncate text-sm font-semibold capitalize text-slate-800 dark:text-zinc-200">
-                              {disease}
+                              {translateDisease(disease, i18n.language)}
                             </span>
                             <span className="shrink-0 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-zinc-500">
                               {t('stats.top.count', { count })}

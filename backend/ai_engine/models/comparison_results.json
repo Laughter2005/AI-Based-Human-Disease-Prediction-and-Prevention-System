@@ -7,7 +7,7 @@
     "recall_macro": 1.0,
     "roc_auc_ovr": 1.0,
     "top_3_accuracy": 1.0,
-    "train_time_sec": 17.81,
+    "train_time_sec": 21.79,
     "best_params": {
       "estimator__C": "0.1",
       "estimator__gamma": "scale",
@@ -23,7 +23,7 @@
     "recall_macro": 1.0,
     "roc_auc_ovr": 1.0,
     "top_3_accuracy": 1.0,
-    "train_time_sec": 25.03,
+    "train_time_sec": 30.83,
     "best_params": {
       "max_depth": "None",
       "min_samples_split": "2"
@@ -38,7 +38,7 @@
     "recall_macro": 1.0,
     "roc_auc_ovr": 1.0,
     "top_3_accuracy": 1.0,
-    "train_time_sec": 49.15,
+    "train_time_sec": 95.4,
     "best_params": {
       "learning_rate": "0.05",
       "max_depth": "4",

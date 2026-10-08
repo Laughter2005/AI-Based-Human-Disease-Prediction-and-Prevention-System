@@ -1,6 +1,6 @@
 {
   "source": "symptom_disease_dataset.csv (Kaggle)",
-  "filter_date": "2025-XX-XX",
+  "filter_date": "2026-10-04",
   "diseases": [
     "Malaria",
     "Typhoid",
@@ -12,7 +12,11 @@
     "Hepatitis D",
     "Hepatitis E",
     "Gastroenteritis",
-    "Pneumonia"
+    "Pneumonia",
+    "Hypothyroidism",
+    "Hypertension",
+    "Diabetes",
+    "Cholera"
   ],
   "rationale": "Diseases with significant burden in Malawi per IDSR bulletins and WHO country data.",
   "sources": [
