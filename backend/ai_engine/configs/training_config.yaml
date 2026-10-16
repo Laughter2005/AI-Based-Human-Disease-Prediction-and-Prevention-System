@@ -1,7 +1,7 @@
 # Training configuration for AI Disease Prediction Engine
 
 data:
-  raw_path: data/raw/symptom_disease_malawi.csv
+  raw_path: data/raw/symptom_disease_malawi_augmented.csv
   processed_dir: data/processed
   test_size: 0.2
   random_state: 42

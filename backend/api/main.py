@@ -10,8 +10,7 @@ from config import get_settings
 from db.base import Base
 from db.session import engine
 from dependencies import get_predictor
-from routes import admin, auth, health, prediction, stats
-
+from routes import admin, auth, diseases, health, hospitals, prediction, stats
 
 settings = get_settings()
 
@@ -54,7 +53,8 @@ app.include_router(prediction.router, prefix=settings.api_prefix)
 app.include_router(auth.router, prefix=settings.api_prefix)
 app.include_router(admin.router, prefix=settings.api_prefix)
 app.include_router(stats.router, prefix=settings.api_prefix)
-
+app.include_router(diseases.router, prefix=settings.api_prefix)
+app.include_router(hospitals.router, prefix=settings.api_prefix)
 
 @app.get("/")
 def root() -> dict:

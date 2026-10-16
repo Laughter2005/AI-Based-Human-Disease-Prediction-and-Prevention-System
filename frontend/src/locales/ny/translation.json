@@ -178,6 +178,17 @@
   "disclaimer_short": "Chida ichi chimapereka chitsogozo chabe osati kuyeza kwa dokotala."
 },
   "result": {
+  "info": {
+  "label": "Kumvetsa matenda awa",
+  "title": "Za {{disease}}",
+  "subtitle": "Dziwani za matenda awa, mmene amafalira, ndi nthawi yofunsa chithandizo.",
+  "loading": "Ikutsegula zambiri za matenda...",
+  "about": "Ndi chiyani?",
+  "transmission": "Mmene amafalira",
+  "symptoms": "Zizindikiro zofala",
+  "when_to_seek": "Nthawi yofunsa chithandizo",
+  "complications": "Zovuta zotheka"
+},
   "label": "Kuyeza kwa AI",
   "title": "Matenda otheka kwambiri",
   "confidence": "Kukhulupirika",
@@ -596,5 +607,24 @@
     "title": "Sitinapeze tsamba",
     "desc": "Tsamba lomwe mukufuna palibe.",
     "cta": "Bwererani kunyumba"
-  }
+  },
+  "hospitals": {
+  "label": "Kumene mungapeze chithandizo",
+  "title": "Zipatala zapafupi",
+  "subtitle": "Zipatala za ku Malawi zomwe zili ndi chithandizo chadzidzidzi ndi cha kunja.",
+  "subtitle_sorted": "Zokonzedwa mwa mtunda kuchokera kumene muli.",
+  "loading": "Ikutsegula zipatala...",
+  "empty": "Palibe zipatala zopezeka m'chigawo chosankhidwa.",
+  "use_location": "Konzani mwa mtunda",
+  "near_me": "Pafupi ndi ine",
+  "locating": "Ikufufuza...",
+  "show_more": "Onetsani zipatala zina",
+  "directions": "Njira",
+  "no_phone": "Palibe foni",
+  "disclaimer": "Zambiri za foni zikhoza kukhala zakale. Chonde tsimikizani ndi chipatala musanapite.",
+  "region_all": "Zonse",
+  "region_northern": "Kumpoto",
+  "region_central": "Pakati",
+  "region_southern": "Kumwera"
+}
 }

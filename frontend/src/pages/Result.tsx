@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 import { translateDisease } from '../utils/diseaseNames';
+import { DiseaseInfoCard } from '../components/result/DiseaseInfoCard';
+import { HospitalList } from '../components/hospitals/HospitalList';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
@@ -65,6 +67,9 @@ export function Result() {
 
           {/* Hero result card */}
           <ResultCard result={result} />
+         
+          {/* NEW: Disease information */}
+       <DiseaseInfoCard diseaseName={result.predictedDisease.name} />
 
           {/* Alternatives */}
           {result.alternativeDiseases.length > 0 && (
@@ -168,6 +173,12 @@ export function Result() {
               </div>
             </div>
           </div>
+
+          {/* Hospital finder — only when severity suggests follow-up */}
+          {(result.predictedDisease.severity === 'moderate' ||
+            result.predictedDisease.severity === 'high') && (
+            <HospitalList />
+          )}
 
           {/* Anonymous nudge */}
           {!user && (

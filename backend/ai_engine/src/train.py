@@ -26,47 +26,57 @@ from preprocess import (
 
 
 def build_models(n_classes: int) -> dict:
-    """Return model name -> (estimator, param_grid)."""
+    """
+    Return model name -> (estimator, param_grid).
+    Class weights are set to 'balanced' so rare diseases aren't under-predicted.
+    """
     return {
         "svm": (
-            CalibratedClassifierCV(
-                SVC(class_weight="balanced", random_state=42),
-                method="sigmoid",
-                cv=5,
-                ensemble=False,
+           CalibratedClassifierCV(
+               SVC(class_weight="balanced", random_state=42),
+               method="sigmoid",
+               cv=5,
+               ensemble=False,   # matches the internal behavior of probability=True
+               n_jobs=-1,
+           ),
+           {
+               "estimator__C": [0.1, 1, 10],
+               "estimator__kernel": ["rbf"],
+               "estimator__gamma": ["scale", "auto"],
+           },
             ),
-            {
-                "estimator__C": [0.1, 1, 10],
-                "estimator__kernel": ["rbf"],
-                "estimator__gamma": ["scale", "auto"],
-            },
-        ),
         "random_forest": (
             RandomForestClassifier(
-                n_estimators=300,
-                class_weight="balanced",
+                n_estimators=500,          # was 300 — more trees = more stable
+                class_weight="balanced_subsample",  # was 'balanced' — better for imbalanced
                 random_state=42,
                 n_jobs=-1,
             ),
             {
                 "max_depth": [None, 20, 40],
                 "min_samples_split": [2, 5],
+                "min_samples_leaf": [1, 2],  # prevent overfitting to rare cases
             },
         ),
         "xgboost": (
             XGBClassifier(
-                n_estimators=300,
+                n_estimators=500,          # was 300 — more boosting rounds
                 objective="multi:softprob",
                 num_class=n_classes,
                 tree_method="hist",
                 random_state=42,
                 n_jobs=-1,
                 eval_metric="mlogloss",
+                # Add regularization to prevent memorization
+                reg_alpha=0.1,             # L1 regularization
+                reg_lambda=1.0,            # L2 regularization
             ),
             {
-                "max_depth": [4, 6, 8],
+                "max_depth": [3, 4, 6],    # was [4,6,8] — shallower = less overfitting
                 "learning_rate": [0.05, 0.1],
                 "subsample": [0.8, 1.0],
+                "colsample_bytree": [0.8, 1.0],  # feature subsampling
+                "min_child_weight": [1, 3],      # regularization
             },
         ),
     }
@@ -82,7 +92,7 @@ def train_and_evaluate(
     cv_folds: int = 5,
     top_k: int = 3,
 ) -> dict:
-    """Train each model, evaluate, save artifacts, return results dict."""
+    """Train each model, evaluate on test set, save artifacts."""
     results: dict[str, dict] = {}
     cv = StratifiedKFold(n_splits=cv_folds, shuffle=True, random_state=42)
 
@@ -116,6 +126,12 @@ def train_and_evaluate(
         model_path = model_dir / f"{name}.joblib"
         joblib.dump(best, model_path)
         print(f"Saved model    : {model_path}")
+
+        # Print test metrics inline
+        print(f"Test accuracy  : {metrics['accuracy']:.4f}")
+        print(f"Test F1-macro  : {metrics['f1_macro']:.4f}")
+        print(f"Test recall    : {metrics['recall_macro']:.4f}")
+        print(f"Test top-3     : {metrics['top_3_accuracy']:.4f}")
 
         results[name] = metrics
 

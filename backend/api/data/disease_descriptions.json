@@ -1,0 +1,347 @@
+{
+  "malaria": {
+    "name": { "en": "Malaria", "ny": "Malungo" },
+    "description": {
+      "en": "Malaria is a life-threatening disease caused by Plasmodium parasites, transmitted through the bite of infected female Anopheles mosquitoes. It is the leading cause of illness and death in Malawi, particularly among children under five and pregnant women.",
+      "ny": "Malungo ndi matenda oopsa opangidwa ndi tizilombo ta Plasmodium, omwe amafalikira kudzera mu kulumidwa ndi udzudzu wachikazi wa Anopheles. Ndi chifukwa chachikulu cha matenda ndi imfa ku Malawi, makamaka kwa ana osakwana zaka zisanu ndi amayi apakati."
+    },
+    "transmission": {
+      "en": "Bite of an infected female Anopheles mosquito, usually between dusk and dawn.",
+      "ny": "Kulumidwa ndi udzudzu wachikazi wa Anopheles, nthawi zambiri pakati pa madzulo ndi m'mawa."
+    },
+    "typical_symptoms": {
+      "en": ["Fever and chills", "Headache", "Body aches and fatigue", "Nausea and vomiting"],
+      "ny": ["Kutentha kwa thupi ndi kuzizira", "Mutu", "Kupweteka kwa thupi ndi kutopa", "Kusanza mtima ndi kusanza"]
+    },
+    "when_to_seek_care": {
+      "en": "Seek care immediately if fever is high, symptoms worsen, or if the patient is a child under 5 or pregnant.",
+      "ny": "Funsani chithandizo mwamsanga ngati kutentha kwa thupi kuli kwakukulu, zizindikiro zikuipiraipira, kapena ngati wodwala ndi mwana wosakwana zaka 5 kapena wapakati."
+    },
+    "complications": {
+      "en": "Severe anaemia, cerebral malaria, organ failure, and death if untreated.",
+      "ny": "Kuchepa kwa magazi kwakukulu, malungo a mu ubongo, kulephera kwa ziwalo, ndi imfa ngati sathandizidwe."
+    }
+  },
+  "typhoid": {
+    "name": { "en": "Typhoid Fever", "ny": "Typhoid" },
+    "description": {
+      "en": "Typhoid fever is a bacterial infection caused by Salmonella Typhi, spread through contaminated food and water. It remains a public health concern in areas with poor sanitation.",
+      "ny": "Typhoid ndi matenda a bakiteriya opangidwa ndi Salmonella Typhi, omwe amafalikira kudzera m'zakudya ndi madzi oipitsidwa. Akadali vuto la thanzi m'malo opanda ukhondo wabwino."
+    },
+    "transmission": {
+      "en": "Eating food or drinking water contaminated with faeces from an infected person.",
+      "ny": "Kudya zakudya kapena kumwa madzi osakanikirana ndi ndowe za munthu wodwala."
+    },
+    "typical_symptoms": {
+      "en": ["Sustained high fever", "Stomach pain", "Constipation or diarrhoea", "Weakness and fatigue"],
+      "ny": ["Kutentha kwakukulu kosatha", "Kupweteka m'mimba", "Kutsekeka kapena kutsegula m'mimba", "Kufooka ndi kutopa"]
+    },
+    "when_to_seek_care": {
+      "en": "Seek care if fever lasts more than 3 days, especially with severe stomach pain.",
+      "ny": "Funsani chithandizo ngati kutentha kwa thupi kukupitirira masiku atatu, makamaka ndi kupweteka kwakukulu m'mimba."
+    },
+    "complications": {
+      "en": "Intestinal bleeding, perforation, and peritonitis if untreated.",
+      "ny": "Kutuluka magazi m'matumbo, kubowoka, ndi kutupa m'mimba ngati sathandizidwe."
+    }
+  },
+  "tuberculosis": {
+    "name": { "en": "Tuberculosis (TB)", "ny": "TB (Chifuwa Chachikulu)" },
+    "description": {
+      "en": "Tuberculosis is a bacterial infection caused by Mycobacterium tuberculosis that primarily affects the lungs. Malawi is among the countries with a high TB burden, and TB is a leading cause of death among people living with HIV.",
+      "ny": "TB ndi matenda a bakiteriya opangidwa ndi Mycobacterium tuberculosis omwe amakhudza kwambiri mapapo. Malawi ndi m'modzi mwa mayiko omwe ali ndi vuto lalikulu la TB, ndipo TB ndi chifukwa chachikulu cha imfa kwa anthu omwe ali ndi HIV."
+    },
+    "transmission": {
+      "en": "Inhaling airborne droplets from an infected person when they cough or sneeze.",
+      "ny": "Kupuma mpweya wokhala ndi tizilombo kuchokera kwa munthu wodwala akamatsokomola kapena kuyetsemula."
+    },
+    "typical_symptoms": {
+      "en": ["Persistent cough for more than 2 weeks", "Coughing blood", "Night sweats", "Weight loss and fatigue"],
+      "ny": ["Chifuwa chosatha kupitirira masabata awiri", "Kutsokomola magazi", "Kutuluka thukuta usiku", "Kuonda ndi kutopa"]
+    },
+    "when_to_seek_care": {
+      "en": "Seek testing immediately if you have coughed for more than 2 weeks. TB treatment is free in Malawi.",
+      "ny": "Funsani kuyezedwa mwamsanga ngati mwakhala mukutsokomola kupitirira masabata awiri. Mankhwala a TB ndi aulere ku Malawi."
+    },
+    "complications": {
+      "en": "Lung damage, spreading to other organs, and death if untreated.",
+      "ny": "Kuwonongeka kwa mapapo, kufalikira ku ziwalo zina, ndi imfa ngati sathandizidwe."
+    }
+  },
+  "dengue": {
+    "name": { "en": "Dengue Fever", "ny": "Dengue" },
+    "description": {
+      "en": "Dengue is a viral infection transmitted by Aedes mosquitoes, which bite during the day. Cases have been reported in Malawi, particularly in the southern region.",
+      "ny": "Dengue ndi matenda a virus opangidwa ndi udzudzu wa Aedes, omwe amaluma masana. Milandu yanenedwa ku Malawi, makamaka m'chigawo chakumwera."
+    },
+    "transmission": {
+      "en": "Bite of an infected Aedes mosquito, usually during daylight hours.",
+      "ny": "Kulumidwa ndi udzudzu wa Aedes, nthawi zambiri masana."
+    },
+    "typical_symptoms": {
+      "en": ["Sudden high fever", "Severe headache", "Pain behind the eyes", "Joint and muscle pain", "Skin rash"],
+      "ny": ["Kutentha kwakukulu mwadzidzidzi", "Mutu wowawa kwambiri", "Kupweteka kumbuyo kwa maso", "Kupweteka kwa mafupa ndi minofu", "Zidzolo pakhungu"]
+    },
+    "when_to_seek_care": {
+      "en": "Seek care if fever lasts more than 2 days, or if you notice bleeding gums or blood in vomit.",
+      "ny": "Funsani chithandizo ngati kutentha kwa thupi kukupitirira masiku awiri, kapena ngati mukuona magazi m'kamwa kapena m'masanza."
+    },
+    "complications": {
+      "en": "Dengue haemorrhagic fever, severe bleeding, and organ failure in severe cases.",
+      "ny": "Dengue yotulutsa magazi, kutuluka magazi kwakukulu, ndi kulephera kwa ziwalo."
+    }
+  },
+  "hepatitis a": {
+    "name": { "en": "Hepatitis A", "ny": "Hepatitis A" },
+    "description": {
+      "en": "Hepatitis A is a viral infection that affects the liver. It spreads through contaminated food and water and is common in areas with poor sanitation.",
+      "ny": "Hepatitis A ndi matenda a virus omwe amakhudza chiwindi. Amafalikira kudzera m'zakudya ndi madzi oipitsidwa ndipo amapezeka kwambiri m'malo opanda ukhondo."
+    },
+    "transmission": {
+      "en": "Contaminated food, water, or close contact with an infected person.",
+      "ny": "Zakudya kapena madzi oipitsidwa, kapena kukhudzana kwapafupi ndi munthu wodwala."
+    },
+    "typical_symptoms": {
+      "en": ["Fatigue", "Nausea and vomiting", "Yellowing of eyes and skin", "Dark urine", "Abdominal pain"],
+      "ny": ["Kutopa", "Kusanza mtima ndi kusanza", "Maso ndi khungu lachikasu", "Mkodzo wakuda", "Kupweteka m'mimba"]
+    },
+    "when_to_seek_care": {
+      "en": "Seek care if jaundice appears or if you cannot keep fluids down.",
+      "ny": "Funsani chithandizo ngati mukuyamba kukhala achikasu kapena ngati mukulephera kumeza madzi."
+    },
+    "complications": {
+      "en": "Acute liver failure (rare), prolonged illness for weeks to months.",
+      "ny": "Kulephera kwa chiwindi mwadzidzidzi (kosowa), matenda aatali kwa masabata kapena miyezi."
+    }
+  },
+  "hepatitis b": {
+    "name": { "en": "Hepatitis B", "ny": "Hepatitis B" },
+    "description": {
+      "en": "Hepatitis B is a viral infection that attacks the liver and can cause both acute and chronic disease. It is a major public health concern in sub-Saharan Africa.",
+      "ny": "Hepatitis B ndi matenda a virus omwe amakhudza chiwindi ndipo amatha kuyambitsa matenda osakhalitsa kapena aatali. Ndi vuto lalikulu la thanzi ku Africa kum'mwera kwa Sahara."
+    },
+    "transmission": {
+      "en": "Contact with infected blood, semen, or other body fluids. Can pass from mother to child at birth.",
+      "ny": "Kukhudzana ndi magazi, umuna, kapena madzi ena a thupi a munthu wodwala. Amatha kupatsirana kuchokera kwa amayi kupita kwa mwana pa kubadwa."
+    },
+    "typical_symptoms": {
+      "en": ["Fatigue", "Jaundice", "Dark urine", "Joint pain", "Loss of appetite"],
+      "ny": ["Kutopa", "Kukhala achikasu", "Mkodzo wakuda", "Kupweteka kwa mafupa", "Kusafuna chakudya"]
+    },
+    "when_to_seek_care": {
+      "en": "Seek testing if you have symptoms or if you may have been exposed. Free testing is available at most clinics.",
+      "ny": "Funsani kuyezedwa ngati muli ndi zizindikiro kapena ngati mungakhale mutakumana ndi kachilombo. Kuyezedwa kwaulere kulipo ku zipatala zambiri."
+    },
+    "complications": {
+      "en": "Chronic hepatitis, liver cirrhosis, and liver cancer if untreated.",
+      "ny": "Hepatitis ya nthawi yaitali, kuwonongeka kwa chiwindi, ndi khansa ya chiwindi ngati sathandizidwe."
+    }
+  },
+  "hepatitis c": {
+    "name": { "en": "Hepatitis C", "ny": "Hepatitis C" },
+    "description": {
+      "en": "Hepatitis C is a viral infection that primarily affects the liver and can become chronic. Modern antiviral treatments can cure most cases.",
+      "ny": "Hepatitis C ndi matenda a virus omwe amakhudza kwambiri chiwindi ndipo amatha kukhala a nthawi yaitali. Mankhwala amakono amatha kuchiza milandu yambiri."
+    },
+    "transmission": {
+      "en": "Contact with infected blood, especially through shared needles or unsterile medical equipment.",
+      "ny": "Kukhudzana ndi magazi a munthu wodwala, makamaka kudzera mu singano zogawana kapena zipangizo zachipatala zosayeretsedwa."
+    },
+    "typical_symptoms": {
+      "en": ["Often no symptoms in early stages", "Fatigue", "Dark urine", "Jaundice (later)"],
+      "ny": ["Nthawi zambiri palibe zizindikiro koyambirira", "Kutopa", "Mkodzo wakuda", "Kukhala achikasu (pambuyo pake)"]
+    },
+    "when_to_seek_care": {
+      "en": "Seek testing if you have risk factors, or if you notice jaundice or persistent fatigue.",
+      "ny": "Funsani kuyezedwa ngati muli ndi zifukwa zake, kapena ngati mukuona chikasu kapena kutopa kosatha."
+    },
+    "complications": {
+      "en": "Liver cirrhosis and liver cancer if untreated over decades.",
+      "ny": "Kuwonongeka kwa chiwindi ndi khansa ya chiwindi ngati sathandizidwe kwa zaka zambiri."
+    }
+  },
+  "hepatitis d": {
+    "name": { "en": "Hepatitis D", "ny": "Hepatitis D" },
+    "description": {
+      "en": "Hepatitis D is a viral infection that only occurs in people who already have hepatitis B. Coinfection makes liver disease progress faster.",
+      "ny": "Hepatitis D ndi matenda a virus omwe amapezeka kokha kwa anthu omwe ali kale ndi hepatitis B. Matenda onse awiri amapangitsa chiwindi kuwonongeka mwachangu."
+    },
+    "transmission": {
+      "en": "Contact with infected blood, same routes as hepatitis B.",
+      "ny": "Kukhudzana ndi magazi a munthu wodwala, njira zofanana ndi hepatitis B."
+    },
+    "typical_symptoms": {
+      "en": ["Severe fatigue", "Jaundice", "Abdominal pain", "Dark urine"],
+      "ny": ["Kutopa kwakukulu", "Kukhala achikasu", "Kupweteka m'mimba", "Mkodzo wakuda"]
+    },
+    "when_to_seek_care": {
+      "en": "Seek specialist care if you have hepatitis B and develop worsening symptoms.",
+      "ny": "Funsani chithandizo cha katswiri ngati muli ndi hepatitis B ndipo zizindikiro zikuipiraipira."
+    },
+    "complications": {
+      "en": "Rapid progression to cirrhosis and liver failure.",
+      "ny": "Kuwonongeka mwachangu kwa chiwindi ndi kulephera kwake."
+    }
+  },
+  "hepatitis e": {
+    "name": { "en": "Hepatitis E", "ny": "Hepatitis E" },
+    "description": {
+      "en": "Hepatitis E is a viral infection transmitted mainly through contaminated drinking water. It is particularly dangerous for pregnant women.",
+      "ny": "Hepatitis E ndi matenda a virus omwe amafalikira makamaka kudzera m'madzi omwe amamwa oipitsidwa. Ndi owopsa makamaka kwa amayi apakati."
+    },
+    "transmission": {
+      "en": "Drinking water contaminated with faeces from an infected person.",
+      "ny": "Kumwa madzi osakanikirana ndi ndowe za munthu wodwala."
+    },
+    "typical_symptoms": {
+      "en": ["Fatigue", "Nausea", "Jaundice", "Abdominal pain", "Dark urine"],
+      "ny": ["Kutopa", "Kusanza mtima", "Kukhala achikasu", "Kupweteka m'mimba", "Mkodzo wakuda"]
+    },
+    "when_to_seek_care": {
+      "en": "Pregnant women should seek care immediately. Others should seek care if jaundice or severe symptoms appear.",
+      "ny": "Amayi apakati ayenera kufunsa chithandizo mwamsanga. Ena ayenera kufunsa chithandizo ngati chikasu kapena zizindikiro zowopsa zikuoneka."
+    },
+    "complications": {
+      "en": "Acute liver failure, high mortality in pregnant women.",
+      "ny": "Kulephera kwa chiwindi, imfa yambiri kwa amayi apakati."
+    }
+  },
+  "gastroenteritis": {
+    "name": { "en": "Gastroenteritis", "ny": "Kutsegula m'mimba" },
+    "description": {
+      "en": "Gastroenteritis is inflammation of the stomach and intestines, usually caused by viral or bacterial infection from contaminated food or water.",
+      "ny": "Kutsegula m'mimba ndi kutupa kwa m'mimba ndi matumbo, nthawi zambiri kumayambitsidwa ndi virus kapena bakiteriya kuchokera m'zakudya kapena madzi oipitsidwa."
+    },
+    "transmission": {
+      "en": "Contaminated food or water, or contact with an infected person.",
+      "ny": "Zakudya kapena madzi oipitsidwa, kapena kukhudzana ndi munthu wodwala."
+    },
+    "typical_symptoms": {
+      "en": ["Diarrhoea", "Vomiting", "Stomach cramps", "Nausea", "Mild fever"],
+      "ny": ["Kutsegula m'mimba", "Kusanza", "Kupweteka m'mimba", "Kusanza mtima", "Kutentha pang'ono kwa thupi"]
+    },
+    "when_to_seek_care": {
+      "en": "Seek care if symptoms last more than 3 days, or if you see blood in stool, or if the patient is a child or elderly.",
+      "ny": "Funsani chithandizo ngati zizindikiro zikupitirira masiku atatu, kapena ngati mukuona magazi m'chimbudzi, kapena ngati wodwala ndi mwana kapena wokalamba."
+    },
+    "complications": {
+      "en": "Severe dehydration, electrolyte imbalance, especially dangerous in children.",
+      "ny": "Kuperewera madzi kwakukulu, kusokonekera kwa mchere m'thupi, koopsa makamaka kwa ana."
+    }
+  },
+  "pneumonia": {
+    "name": { "en": "Pneumonia", "ny": "Nimonia" },
+    "description": {
+      "en": "Pneumonia is an infection of the lungs that can be caused by bacteria, viruses, or fungi. It is a leading cause of death in children under five worldwide.",
+      "ny": "Nimonia ndi matenda a mapapo omwe amatha kuyambitsidwa ndi bakiteriya, virus, kapena bowa. Ndi chifukwa chachikulu cha imfa kwa ana osakwana zaka zisanu padziko lonse."
+    },
+    "transmission": {
+      "en": "Inhaling droplets from an infected person's cough or sneeze.",
+      "ny": "Kupuma mpweya wokhala ndi tizilombo kuchokera kwa munthu wodwala akamatsokomola kapena kuyetsemula."
+    },
+    "typical_symptoms": {
+      "en": ["Cough with phlegm", "Fever", "Difficulty breathing", "Chest pain", "Fatigue"],
+      "ny": ["Chifuwa ndi malovu", "Kutentha kwa thupi", "Kuvutika kupuma", "Kupweteka pachifuwa", "Kutopa"]
+    },
+    "when_to_seek_care": {
+      "en": "Seek care immediately if breathing is difficult, especially in children or the elderly.",
+      "ny": "Funsani chithandizo mwamsanga ngati mukuvutika kupuma, makamaka kwa ana kapena okalamba."
+    },
+    "complications": {
+      "en": "Respiratory failure, sepsis, and death if untreated.",
+      "ny": "Kulephera kupuma, sepsis, ndi imfa ngati sathandizidwe."
+    }
+  },
+  "hypothyroidism": {
+    "name": { "en": "Hypothyroidism", "ny": "Kuchepa kwa thyroid" },
+    "description": {
+      "en": "Hypothyroidism is a condition where the thyroid gland does not produce enough thyroid hormone. This slows down metabolism and affects almost every organ in the body.",
+      "ny": "Kuchepa kwa thyroid ndi mkhalidwe womwe chifuwa cha thyroid sichipanga mahomoni okwanira a thyroid. Izi zimachepetsa kagayidwe ka thupi ndipo zimakhudza pafupifupi ziwalo zonse za thupi."
+    },
+    "transmission": {
+      "en": "Not contagious. Often caused by iodine deficiency, autoimmune disease, or thyroid surgery.",
+      "ny": "Sizipatsirana. Nthawi zambiri zimayambitsidwa ndi kusowa kwa iodine, matenda a autoimmune, kapena opaleshoni ya thyroid."
+    },
+    "typical_symptoms": {
+      "en": ["Fatigue and weakness", "Weight gain", "Cold intolerance", "Constipation", "Dry skin and brittle nails"],
+      "ny": ["Kutopa ndi kufooka", "Kunenepa", "Kusamva kutentha", "Kutsekeka m'mimba", "Khungu louma ndi zikhadabo zosweka"]
+    },
+    "when_to_seek_care": {
+      "en": "See a health worker if you have persistent fatigue, weight gain, or cold intolerance.",
+      "ny": "Onani wothandizira wa zaumoyo ngati muli ndi kutopa kosatha, kunenepa, kapena kusamva kutentha."
+    },
+    "complications": {
+      "en": "Heart problems, infertility, and severe depression if untreated.",
+      "ny": "Mavuto a mtima, kusabereka, ndi kukhumudwa kwakukulu ngati sathandizidwe."
+    }
+  },
+  "diabetes": {
+    "name": { "en": "Diabetes", "ny": "Matenda a shuga" },
+    "description": {
+      "en": "Diabetes is a chronic condition in which the body cannot properly regulate blood sugar. Type 1 requires insulin; Type 2 is often managed with lifestyle and medication.",
+      "ny": "Matenda a shuga ndi mkhalidwe wosatha womwe thupi silingathe kuwongolera shuga wa m'magazi bwino. Mtundu woyamba umafuna insulin; mtundu wachiwiri nthawi zambiri umayendetsedwa ndi moyo ndi mankhwala."
+    },
+    "transmission": {
+      "en": "Not contagious. Caused by genetics, lifestyle factors, and other conditions.",
+      "ny": "Sizipatsirana. Zimayambitsidwa ndi chibadwa, moyo, ndi zifukwa zina."
+    },
+    "typical_symptoms": {
+      "en": ["Frequent urination", "Excessive thirst and hunger", "Unexplained weight loss", "Fatigue", "Blurred vision"],
+      "ny": ["Kukodza pafupipafupi", "Kumwa madzi ndi njara yambiri", "Kuonda mosadziwika", "Kutopa", "Kusaona bwino"]
+    },
+    "when_to_seek_care": {
+      "en": "Seek testing if you have symptoms, especially if you have a family history of diabetes.",
+      "ny": "Funsani kuyezedwa ngati muli ndi zizindikiro, makamaka ngati muli ndi mbiri ya matenda a shuga m'banja."
+    },
+    "complications": {
+      "en": "Blindness, kidney failure, nerve damage, and cardiovascular disease over time.",
+      "ny": "Kusaona, kulephera kwa impso, kuwonongeka kwa minyewa, ndi matenda a mtima pakapita nthawi."
+    }
+  },
+  "hypertension": {
+    "name": { "en": "Hypertension (High Blood Pressure)", "ny": "Kuthamanga kwa magazi" },
+    "description": {
+      "en": "Hypertension is a condition where blood pressure is consistently elevated. It usually has no symptoms, earning it the name 'silent killer'. It is a major risk factor for heart disease and stroke.",
+      "ny": "Kuthamanga kwa magazi ndi mkhalidwe womwe mphamvu ya magazi imakhala yokwera nthawi zonse. Nthawi zambiri ilibe zizindikiro, ndipo imatchedwa 'wakupha wachete'. Ndi chifukwa chachikulu cha matenda a mtima ndi sitiroko."
+    },
+    "transmission": {
+      "en": "Not contagious. Caused by genetics, diet, stress, and lifestyle factors.",
+      "ny": "Sizipatsirana. Zimayambitsidwa ndi chibadwa, zakudya, nkhawa, ndi moyo."
+    },
+    "typical_symptoms": {
+      "en": ["Often no symptoms", "Headache (severe cases)", "Nosebleeds", "Shortness of breath", "Chest pain"],
+      "ny": ["Nthawi zambiri palibe zizindikiro", "Mutu (milandu yoopsa)", "Kutuluka magazi m'mphuno", "Kulephera kupuma", "Kupweteka pachifuwa"]
+    },
+    "when_to_seek_care": {
+      "en": "Get your blood pressure checked regularly, even if you feel fine. Seek care immediately if you have chest pain or severe headache.",
+      "ny": "Yesetsani kuyeza BP pafupipafupi, ngakhale mutamva bwino. Funsani chithandizo mwamsanga ngati muli ndi kupweteka pachifuwa kapena mutu wowawa kwambiri."
+    },
+    "complications": {
+      "en": "Heart attack, stroke, kidney failure, and blindness if uncontrolled.",
+      "ny": "Kugunda kwa mtima, sitiroko, kulephera kwa impso, ndi kusaona ngati sikuwongoleredwa."
+    }
+  },
+  "cholera": {
+    "name": { "en": "Cholera", "ny": "Kolera" },
+    "description": {
+      "en": "Cholera is an acute diarrhoeal infection caused by Vibrio cholerae bacteria. It spreads through contaminated water and can cause death within hours if untreated. Malawi has experienced major cholera outbreaks in recent years.",
+      "ny": "Kolera ndi matenda oopsa a kutsegula m'mimba opangidwa ndi bakiteriya ya Vibrio cholerae. Amafalikira kudzera m'madzi oipitsidwa ndipo amatha kupha mkati mwa maola ngati sathandizidwe. Malawi yakumana ndi miliri ikuluikulu ya kolera m'zaka zaposachedwa."
+    },
+    "transmission": {
+      "en": "Drinking water or eating food contaminated with faeces containing the bacteria.",
+      "ny": "Kumwa madzi kapena kudya zakudya zosakanikirana ndi ndowe zokhala ndi bakiteriya."
+    },
+    "typical_symptoms": {
+      "en": ["Profuse watery diarrhoea (rice-water stool)", "Vomiting", "Rapid dehydration", "Sunken eyes", "Muscle cramps"],
+      "ny": ["Kutsegula m'mimba kwakukulu (ndowe zowoneka ngati madzi a mpunga)", "Kusanza", "Kuperewera madzi mwachangu", "Maso obira", "Kukhwinyata kwa minofu"]
+    },
+    "when_to_seek_care": {
+      "en": "Seek care IMMEDIATELY. Cholera can be fatal within hours. Start ORS right away and go to the nearest clinic.",
+      "ny": "Funsani chithandizo MWAMSANGA. Kolera ikhoza kupha mkati mwa maola. Yambani ORS nthawi yomweyo ndi kupita ku chipatala chapafupi."
+    },
+    "complications": {
+      "en": "Severe dehydration, hypovolemic shock, and death if untreated.",
+      "ny": "Kuperewera madzi kwakukulu, kugunda kwa mtima chifukwa cha kuchepa kwa magazi, ndi imfa ngati sathandizidwe."
+    }
+  }
+}

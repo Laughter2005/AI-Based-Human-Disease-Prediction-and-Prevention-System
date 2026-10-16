@@ -178,6 +178,17 @@
   "disclaimer_short": "This tool provides guidance only and is not a medical diagnosis."
 },
 "result": {
+  "info": {
+  "label": "Understanding this condition",
+  "title": "About {{disease}}",
+  "subtitle": "Learn about this disease, its transmission, and when to seek care.",
+  "loading": "Loading disease information...",
+  "about": "What is it?",
+  "transmission": "How it spreads",
+  "symptoms": "Typical symptoms",
+  "when_to_seek": "When to seek care",
+  "complications": "Possible complications"
+},
   "label": "AI diagnosis",
   "title": "Most likely condition",
   "confidence": "Confidence",
@@ -596,5 +607,24 @@
     "title": "Page not found",
     "desc": "The page you're looking for doesn't exist.",
     "cta": "Go home"
-  }
+  },
+"hospitals": {
+  "label": "Where to get care",
+  "title": "Nearby health facilities",
+  "subtitle": "Malawi health facilities with emergency and outpatient services.",
+  "subtitle_sorted": "Sorted by distance from your location.",
+  "loading": "Loading hospitals...",
+  "empty": "No hospitals found for the selected region.",
+  "use_location": "Sort by distance",
+  "near_me": "Near me",
+  "locating": "Locating...",
+  "show_more": "Show more facilities",
+  "directions": "Directions",
+  "no_phone": "No phone on file",
+  "disclaimer": "Contact details may be outdated. Please verify with the facility before travelling.",
+  "region_all": "All",
+  "region_northern": "Northern",
+  "region_central": "Central",
+  "region_southern": "Southern"
+}
 }
