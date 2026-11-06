@@ -626,5 +626,28 @@
   "region_northern": "Kumpoto",
   "region_central": "Pakati",
   "region_southern": "Kumwera"
+},
+"ussd_page": {
+  "eyebrow": "Njira Yopanda Intaneti",
+  "title": "Chithandizo cha thanzi pa foni iliyonse",
+  "subtitle": "Mulibe smartphone? Palibe vuto. Imbani nambala yathu pa foni iliyonse kuti muone zizindikiro. Palibe pulogalamu, palibe intaneti, palibe data yofunika.",
+  "cta_dial": "Imbani *384*12345#",
+  "cta_simulate": "Onani mmene zimagwira",
+  "how_title": "Mmene mungagwiritse ntchito USSD",
+  "step1_title": "1. Imbani nambala",
+  "step1_desc": "Tsegulani foni yanu ndipo lembani *384*12345#, kenako dinani kuyimba.",
+  "step2_title": "2. Yankhani mafunso",
+  "step2_desc": "Gwiritsani ntchito manambala kusankha chilankhulo ndi zizindikiro.",
+  "step3_title": "3. Pezani zotsatira",
+  "step3_desc": "Landirani zotsatira ndi malangizo a kupewa pomwepo pa sikirini.",
+  "sim_title": "Yesani chowonetsera",
+  "sim_desc": "Umu ndi mmene menyu imawonekera pa foni wamba.",
+  "features_title": "Yopangidwira dziko lenileni",
+  "feat1_title": "Palibe Intaneti Yofunika",
+  "feat1_desc": "USSD imagwira ntchito pa netiweki za GSM, kutanthauza kuti imagwira ngakhale kumidzi kopanda 3G kapena 4G.",
+  "feat2_title": "Imagwira pa Foni Iliyonse",
+  "feat2_desc": "Imatengera foni zotsika mtengo kwambiri, kuwonetsetsa kuti anthu ovutika kwambiri akhoza kuigwiritsa ntchito.",
+  "feat3_title": "Chingerezi ndi Chichewa",
+  "feat3_desc": "Menyu za USSD zili m'zinenero zonse ziwiri, kulola ogwiritsa kugwiritsa ntchito chilankhulo chomwe amamva bwino."
 }
 }

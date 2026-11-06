@@ -626,5 +626,28 @@
   "region_northern": "Northern",
   "region_central": "Central",
   "region_southern": "Southern"
+},
+"ussd_page": {
+  "eyebrow": "Offline Access",
+  "title": "Healthcare on any phone",
+  "subtitle": "No smartphone? No problem. Dial our shortcode on any mobile phone to check your symptoms. No app, no internet, no data required.",
+  "cta_dial": "Dial *384*12345#",
+  "cta_simulate": "See how it works",
+  "how_title": "How to use USSD",
+  "step1_title": "1. Dial the code",
+  "step1_desc": "Open your phone's dial pad and type *384*12345#, then press call.",
+  "step2_title": "2. Answer the prompts",
+  "step2_desc": "Use the numbers on your keypad to select your language and symptoms.",
+  "step3_title": "3. Get your result",
+  "step3_desc": "Receive your prediction and prevention advice directly on the screen.",
+  "sim_title": "Try the simulator",
+  "sim_desc": "This is exactly what the menu looks like on a standard feature phone.",
+  "features_title": "Built for the real world",
+  "feat1_title": "No Internet Needed",
+  "feat1_desc": "USSD works on GSM networks, meaning it functions even in rural areas without 3G or 4G coverage.",
+  "feat2_title": "Works on Any Phone",
+  "feat2_desc": "It supports the most basic, low-cost feature phones, ensuring accessibility for the most vulnerable populations.",
+  "feat3_title": "English & Chichewa",
+  "feat3_desc": "The USSD menus are fully bilingual, allowing users to interact in the language they understand best."
 }
 }

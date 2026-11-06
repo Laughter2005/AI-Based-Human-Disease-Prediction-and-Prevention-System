@@ -23,11 +23,13 @@ export function Footer() {
         { to: '/', label: t('footer.link_home') },
         { to: '/predict', label: t('footer.link_predict') },
         { to: '/about', label: t('footer.link_about') },
+        { to: '/ussd', label: t('nav.ussd') },
       ]
     : [
         { to: '/', label: t('footer.link_home') },
         { to: '/predict', label: t('footer.link_predict') },
         { to: '/about', label: t('footer.link_about') },
+        { to: '/ussd', label: t('nav.ussd') },
         { to: '/login', label: t('footer.link_login') },
         { to: '/register', label: t('footer.link_register') },
       ];
